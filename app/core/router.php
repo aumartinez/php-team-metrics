@@ -33,7 +33,7 @@ class Router {
     # If controller is not found or not exists as a class handler
     # set default controller and not found method
     if (empty($controller)) {
-      $controller = $this->default_controller;
+      $controller = $this->default_controller;      
     }
     else if (!(class_exists($controller))) {
       $controller = $this->default_controller;
