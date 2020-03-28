@@ -45,6 +45,7 @@ class Login extends Controller {
     }    
   }
   
+  # Not found handler
   public function not_found() {
     $this->build_page("404");
   }
