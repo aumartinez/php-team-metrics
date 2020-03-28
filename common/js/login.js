@@ -2,8 +2,8 @@
 
 $(document).ready(function(){
   //To do
-  
-  $("#login-form").submit(function(evt){
+    
+  $("#login-form").submit(function(evt){    
     $(".loader").addClass("active");
     var errors = validateForm();
     
@@ -15,29 +15,28 @@ $(document).ready(function(){
       displayErrors(errors);
       evt.preventDefault();
       window.scrollTo(0, 0);
-      $(".loader").removeClass("active");
-      return false;
+      $(".loader").removeClass("active");      
     }
   });
   
-  function validateForm() {
-    var errors = [];
-    
+  function validateForm() {    
+    var arr = [];
+        
     //Required fields    
     if ($("#user").val().length == 0) {
-      errors.push["user"];
+      arr.push("user");
     }
     
     if ($("#password").val().length == 0) {
-      errors.push["password"];
+      arr.push("password");
     }
     
-    return errors;
+    return arr;
   }
   
   function displayErrors(errors) {
     for (var i = 0; i < errors.length; i++) {
-      $("#" + errors[i] + "\"").next().addClass("active");
+      $("#" + errors[i]).next().addClass("active");
     }
     
     $("#error-div").text("Errors found!");

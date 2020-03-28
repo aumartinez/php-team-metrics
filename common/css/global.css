@@ -125,6 +125,10 @@ a.btn-primary:hover {
   cursor: pointer;
 }
 
+#error-div {
+  color: red;
+}
+
 .error-mess {
   color: red;
   display: none;
@@ -188,4 +192,28 @@ section.body .form-wrapper {
 
 .login-logo {
   max-height: 120px;
+}
+
+.loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;  
+  top: 0;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.loader img {
+  display: block;
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  top: 35%;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.loader.active {
+  display: block;
 }
