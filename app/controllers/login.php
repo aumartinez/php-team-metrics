@@ -7,8 +7,8 @@ class Login extends Controller {
   public function __construct($controller, $method) {
     parent::__construct($controller, $method);
     
-    session_start();   
-        
+    session_start();
+    
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Dbmodel");
     $this->load_model("Pagemodel");
