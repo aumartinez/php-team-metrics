@@ -19,6 +19,23 @@ $(document).ready(function(){
     }
   });
   
+  var clicked = false;
+  
+  $("#view-password").click(function(){    
+    if (clicked == false){
+      $("#password").attr("type", "text");
+      $("#view-password i").removeClass("fa-eye");
+      $("#view-password i").addClass("fa-eye-slash");
+      clicked = true;
+    }
+    else {
+      $("#password").attr("type", "password");
+      $("#view-password i").removeClass("fa-eye-slash");
+      $("#view-password i").addClass("fa-eye");
+      clicked = false;
+    }
+  });
+  
   function validateForm() {    
     var arr = [];
         
