@@ -1,0 +1,58 @@
+    <section class="body">
+      <div class="container bg-white form-wrapper">
+        <div class="row">
+          <div class="col-sm-4 col-center">
+            <form id="login-form" action="{$SITE_ROOT$}/login/process" method="post">
+              <fieldset>
+                <legend>
+                  Login
+                </legend>
+                
+                <div id="errorDiv">
+                  {$LOGIN_ERROR$}
+                </div>
+                
+                <div class="form-group">
+                  <label for="email">
+                    E-mail Address or UserName:
+                  </label>
+                  <input class="form-control" type="text" id="user" name="user" />
+                  <p class="error-mess">
+                    Email / UserName is required
+                  </p>
+                </div>
+                
+                <div class="form-group">
+                  <label for="password">
+                    Password:
+                  </label>
+                  <button id="view-password" type="button" class="view-pass"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                  <input class="form-control" type="password" id="password" name="password" />
+                  <p class="error-mess">
+                    Password is required
+                  </p>
+                </div>
+                
+                <div class="form-group">
+                  <p>
+                    <a href="recovery.php" title="Forgot password">Forgot your password?</a>
+                  </p>
+                </div>
+                
+                <div class="form-group">
+                  <p>
+                    Not registered? Click <a href="register.php" title="Register">here</a> to register!
+                  </p>
+                </div>
+                
+                <div class="form-group">
+                  <button class="btn btn-primary long-btn" type="submit" id="submitForm" name="submitForm">
+                    Login
+                  </button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
