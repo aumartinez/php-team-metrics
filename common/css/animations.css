@@ -1,0 +1,404 @@
+/* animations stylesheet */
+
+.ani-blink {
+  -webkit-animation: blink 0.5s linear;
+  animation: blink 0.5s linear;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;  
+}
+
+.ani-fade-in.active {
+  -webkit-animation: fade-in 2s ease;
+  animation: fade-in 2s ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.ani-fade-top.active {
+  -webkit-animation: fade-in-top 2s ease;
+  animation: fade-in-top 2s ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.ani-fade-bottom.active {
+  -webkit-animation: fade-in-bottom 2s ease;
+  animation: fade-in-bottom 2s ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.ani-fade-right.active {
+  -webkit-animation: fade-in-right 2s ease;
+  animation: fade-in-right 2s ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.ani-fade-left.active {
+  -webkit-animation: fade-in-left 2s ease;
+  animation: fade-in-left 2s ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.ani-move-right.active {
+  -webkit-animation: move-to-right 2s ease;
+  animation: move-to-right 2s ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.ani-move-left.active {
+  -webkit-animation: move-to-left 2s ease;
+  animation: move-to-left 2s ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.ani-scale-in.active {
+  -webkit-animation: scale-in 2s ease;
+  animation: scale-in 2s ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.ani-scale-out.active {
+  -webkit-animation: scale-out 2s ease;
+  animation: scale-out 2s ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+
+.ani-shake.active {
+  -webkit-animation: shake-it 0.8s ease;
+  animation: shake-it 0.8s ease;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+/* Blinking */
+
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Fade in place */
+
+@-webkit-keyframes fade-in {
+  0% {    
+    opacity: 0;
+  }
+  100% {    
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  0% {    
+    opacity: 0;
+  }
+  100% {    
+    opacity: 1;
+  }
+}
+
+
+/* Fade in to top */
+
+@-webkit-keyframes fade-in-top {
+  0% {
+    -webkit-transform: translateY(50px);
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-top {
+  0% {
+    -webkit-transform: translateY(50px);
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* Fade in to bottom */
+
+@-webkit-keyframes fade-in-bottom {
+  0% {
+    -webkit-transform: translateY(-50px);
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-bottom {
+  0% {
+    -webkit-transform: translateY(-50px);
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Fade in to right */
+
+@-webkit-keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-right {
+  0% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* Fade in to left */
+
+@-webkit-keyframes fade-in-left {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-left {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* Move from left to right */
+
+@-webkit-keyframes move-to-right {
+  0% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes move-to-right {
+  0% {
+    -webkit-transform: translateX(-50px);
+    transform: translateX(-50px);    
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);    
+  }
+}
+
+/* Move from right to left */
+
+@-webkit-keyframes move-to-left {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes move-to-left {
+  0% {
+    -webkit-transform: translateX(50px);
+    transform: translateX(50px);    
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);    
+  }
+}
+
+
+/* Scale in */
+
+@-webkit-keyframes scale-in {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);;
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+/* Scale out */
+
+@-webkit-keyframes scale-out {
+  0% {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);;
+  }
+}
+
+@keyframes scale-out {
+  0% {
+    -webkit-transform: scale(1.5);
+    transform: scale(1.5);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+/* Shake */
+
+@-webkit-keyframes shake-it {
+  0% {
+    -webkit-transform: translateX(5px) rotate(0deg);
+    transform: translateX(5px) rotate(0deg);
+  }
+  10% {
+    -webkit-transform: translateX(-10px) rotate(-3deg);
+    transform: translateX(-10px) rotate(-3deg);
+  }
+  20% {
+    -webkit-transform: translateX(0) rotate(3deg);
+    transform: translateX(0) rotate(3deg);
+  }
+  30% {
+    -webkit-transform: translateX(10px) rotate(0deg);
+    transform: translateX(10px) rotate(0deg);
+  }
+  40%, 80% {
+    -webkit-transform: translateX(-5px) rotate(3deg);
+    transform: translateX(-5px) rotate(3deg);
+  }
+  50% {
+    -webkit-transform: translateX(10px) rotate(-3deg);
+    transform: translateX(10px) rotate(-3deg);
+  }
+  60%, 100% {
+    -webkit-transform: translateX(0) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
+  }
+  70%, 90% {
+    -webkit-transform: translateX(10px) rotate(-3deg);
+    transform: translateX(10px) rotate(-3deg);
+  }
+}
+
+@keyframes shake-it {
+  0% {
+    -webkit-transform: translateX(5px) rotate(0deg);
+    transform: translateX(5px) rotate(0deg);
+  }
+  10% {
+    -webkit-transform: translateX(-10px) rotate(-3deg);
+    transform: translateX(-10px) rotate(-3deg);
+  }
+  20% {
+    -webkit-transform: translateX(0) rotate(3deg);
+    transform: translateX(0) rotate(3deg);
+  }
+  30% {
+    -webkit-transform: translateX(10px) rotate(0deg);
+    transform: translateX(10px) rotate(0deg);
+  }
+  40%, 80% {
+    -webkit-transform: translateX(-5px) rotate(3deg);
+    transform: translateX(-5px) rotate(3deg);
+  }
+  50% {
+    -webkit-transform: translateX(10px) rotate(-3deg);
+    transform: translateX(10px) rotate(-3deg);
+  }
+  60%, 100% {
+    -webkit-transform: translateX(0) rotate(0deg);
+    transform: translateX(0) rotate(0deg);
+  }
+  70%, 90% {
+    -webkit-transform: translateX(10px) rotate(-3deg);
+    transform: translateX(10px) rotate(-3deg);
+  }
+}
