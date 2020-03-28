@@ -147,6 +147,10 @@ a.btn-primary:hover {
   border-radius: 0;
 }
 
+.img-responsive.img-center {
+  margin: 0 auto;
+}
+
 /* Content */
 
 section.body {
@@ -180,4 +184,8 @@ section.body .form-wrapper {
   border: none;
   background-color: transparent;
   color: #aaa;
+}
+
+.login-logo {
+  max-height: 120px;
 }

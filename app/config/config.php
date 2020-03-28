@@ -8,6 +8,8 @@ define ("DBHOST", "localhost");
 
 # App name
 define ("WEB_TITLE", "Web app");
+
+# App main folder name
 define ("PATH", "php-team-metrics");
 
 # PATH to media files and site root constants

@@ -1,9 +1,12 @@
     <section class="body">
       <div class="container bg-white form-wrapper">
         <div class="row">
-          <div class="col-sm-4 col-center">
+          <div class="col-sm-4 col-center">            
             <form id="login-form" action="{$SITE_ROOT$}/auth/login" method="post">
-              <fieldset>
+              <p class="text-center">
+                <img class="img-responsive img-center login-logo" src="{$MEDIA$}/img/logo.png" alt="Company logo" />
+              </p>
+              <fieldset>                
                 <legend>
                   Login
                 </legend>
@@ -56,3 +59,7 @@
         </div>
       </div>
     </section>
+    
+    <div class="loader">
+      <img src="{$MEDIA$}/img/loader.gif" alt="loader" />
+    </div>
