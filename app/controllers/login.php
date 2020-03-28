@@ -23,9 +23,7 @@ class Login extends Controller {
       $this->build_page("home");
       unset($_SESSION["logged"]);
     }
-    else {      
-      $this->build_page("login");
-      
+    else {                  
       # If errors are returned
       $err_key = "LOGIN_ERROR";
       $err_mess = "";
@@ -41,6 +39,9 @@ class Login extends Controller {
           $err_mess .= $error . "<br />\n";
         }
       };
+      
+      $this->output->add_locale($err_key, $err_mess);
+      $this->build_page("login");
     }    
   }
   
