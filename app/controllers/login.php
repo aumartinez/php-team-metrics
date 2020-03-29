@@ -28,7 +28,7 @@ class Login extends Controller {
       $err_key = "LOGIN_ERROR";
       $err_mess = "";
       
-      if (isset($_SESSION["error"]) && isset($_SESSION["form"])){
+      if (isset($_SESSION["error"]) && isset($_SESSION["submit-form"])){
         unset($_SESSION["form"]);
         
         $err_mess = "\n";

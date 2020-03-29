@@ -2,17 +2,37 @@
 
 class Auth extends Controller {
   
-  protected $output;  
-    
   public function __construct($controller, $method) {
     parent::__construct($controller, $method);
-        
+    
+    session_start();
+    
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Authmodel");    
   }
+  
+  public function login() {
+    
+    # Check if referred URI is coming from login form
+    if (!isset($_POST["submit-form"])) {
+      $this->not_found();
+    }
+    
+    $_SESSION["submit-form"] = true;
+    
+    if (isset($_SESSION["error"])) {
+      unset($_SESSION["error"]);
+    }
+    
+    $_SESSION["error"] = array();
+    
+    # Initialize methods
+    $this->get_model("Authmodel")->login_required();
+  }
+ 
    
   public function not_found() {
-    echo "loaded";
+    $this->get_model("Authmodel")->redirect(PATH . "/login");
   }
   
 }
