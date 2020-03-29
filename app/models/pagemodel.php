@@ -140,10 +140,10 @@ class Pagemodel extends Dbmodel {
   
   # Build footer
   protected function get_footer($page_name) {
-    $excluded_pages = EXCLUDED_PAGES;    
+    $excluded_pages = EXCLUDED_PAGES;
     $html = "";
     
-    if (file_exists(HTML . DS . "temp" . DS . "footer.html")) {
+    if (file_exists(HTML . DS . "temp" . DS . "footer.html") && !in_array($page_name, $excluded_pages)) {
       $html .= file_get_contents(HTML . DS . "temp" . DS . "footer.html");
       $html .= "\n";
     }
@@ -152,8 +152,7 @@ class Pagemodel extends Dbmodel {
   }
   
   # Add bottom JS scripts
-  protected function get_scripts($page_name) {
-    $excluded_pages = EXCLUDED_PAGES;    
+  protected function get_scripts($page_name) {      
     $html = "";
     
     if (file_exists(HTML . DS . "temp" . DS . $page_name . "scripts.html")) {
