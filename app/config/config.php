@@ -22,4 +22,11 @@ define ("DEFAULT_CONTROLLER", "login");
 define ("DEFAULT_METHOD", "index");
 define ("NOT_FOUND", "not_found");
 
+# Required values
+define ("LOGIN_REQUIRED", 
+        array(
+          "user",
+          "password"
+        ));
+
 ?>
