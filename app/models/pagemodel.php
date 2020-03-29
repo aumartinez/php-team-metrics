@@ -114,7 +114,7 @@ class Pagemodel extends Dbmodel {
   
   # Build templated header (navigation, branding)
   protected function get_header($page_name) {
-    $excluded_pages = array("login", "register", "404");
+    $excluded_pages = EXCLUDED_PAGES;
   
     $html = "";
     
@@ -140,7 +140,7 @@ class Pagemodel extends Dbmodel {
   
   # Build footer
   protected function get_footer($page_name) {
-    $excluded_pages = array("login", "register", "404");    
+    $excluded_pages = EXCLUDED_PAGES;    
     $html = "";
     
     if (file_exists(HTML . DS . "temp" . DS . "footer.html")) {
