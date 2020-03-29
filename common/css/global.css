@@ -169,6 +169,7 @@ section.body .form-wrapper {
 
 /* Login */
 
+#register-form,
 #login-form {
   padding: 60px 0;
 }

@@ -29,4 +29,10 @@ define ("LOGIN_REQUIRED",
           "password"
         ));
 
+# Excluded pages
+define ("EXCLUDED_PAGES",
+        array(
+          "login",
+          "register"
+        ));
 ?>

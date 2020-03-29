@@ -114,7 +114,7 @@ class Pagemodel extends Dbmodel {
   
   # Build templated header (navigation, branding)
   protected function get_header($page_name) {
-    $excluded_pages = array("login", "404");
+    $excluded_pages = array("login", "register", "404");
   
     $html = "";
     
@@ -140,9 +140,10 @@ class Pagemodel extends Dbmodel {
   
   # Build footer
   protected function get_footer($page_name) {
+    $excluded_pages = array("login", "register", "404");    
     $html = "";
     
-    if (file_exists(HTML . DS . "temp" . DS . $page_name ."footer.html")) {
+    if (file_exists(HTML . DS . "temp" . DS . "footer.html")) {
       $html .= file_get_contents(HTML . DS . "temp" . DS . "footer.html");
       $html .= "\n";
     }
@@ -151,8 +152,10 @@ class Pagemodel extends Dbmodel {
   }
   
   # Add bottom JS scripts
-  protected function get_scripts($page_name) {
+  protected function get_scripts($page_name = "default") {
     $html = "";
+    
+    $excluded_pages = array("login", "404");
     
     if (file_exists(HTML . DS . "temp" . DS . $page_name . "scripts.html")) {
       $html .= file_get_contents(HTML . DS . "temp" . DS . $page_name ."scripts.html");
