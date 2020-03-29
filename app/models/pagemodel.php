@@ -152,10 +152,9 @@ class Pagemodel extends Dbmodel {
   }
   
   # Add bottom JS scripts
-  protected function get_scripts($page_name = "default") {
+  protected function get_scripts($page_name) {
+    $excluded_pages = EXCLUDED_PAGES;    
     $html = "";
-    
-    $excluded_pages = array("login", "404");
     
     if (file_exists(HTML . DS . "temp" . DS . $page_name . "scripts.html")) {
       $html .= file_get_contents(HTML . DS . "temp" . DS . $page_name ."scripts.html");

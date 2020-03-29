@@ -155,6 +155,10 @@ a.btn-primary:hover {
   margin: 0 auto;
 }
 
+.required {
+  color: red;
+}
+
 /* Content */
 
 section.body {
