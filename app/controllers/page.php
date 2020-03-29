@@ -14,22 +14,7 @@ class Page extends Controller {
     $this->output = new Pageview();
   }
   
-  # Each method will request the model to present the local resource
-  public function home() {
-    $this->get_model("Pagemodel")->page_title = "Home";
-    $this->build_page($this->method);
-  }
-  
-  public function about() {
-    $this->get_model("Pagemodel")->page_title = "About Us";
-    $this->build_page($this->method);
-  }
-  
-  public function contact() {
-    $this->get_model("Pagemodel")->page_title = "Contact Us";
-    $this->build_page($this->method);
-  }
-  
+  # Each method will request the model to present the local resource  
   public function not_found() {
     $this->build_page("404");
   }
