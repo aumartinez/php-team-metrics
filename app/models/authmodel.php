@@ -2,7 +2,7 @@
 
 class Authmodel extends Dbmodel {
   public $sanitized = array();  
-  public $email;
+  public $user;
   public $pass;
   public $is_logged = false;  
   
@@ -33,10 +33,10 @@ class Authmodel extends Dbmodel {
   # Auth user
   public function auth_user($email, $pass) {
     if ($email && pass) {
-      $this->email = $email;
+      $this->user = $user;
       $this->pass = $pass;
       
-      if ($this->email == "admin" && $this->pass = "123") {
+      if ($this->user == "admin" && $this->pass = "123") {
         $this->is_logged = true;
         $_SESSION["logged"] = true;
         

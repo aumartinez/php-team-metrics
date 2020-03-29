@@ -40,8 +40,8 @@ $(document).ready(function(){
     var arr = [];
         
     //Required fields    
-    if ($("#email").val().length == 0) {
-      arr.push("email");
+    if ($("#user").val().length == 0) {
+      arr.push("user");
     }
     
     if ($("#password").val().length == 0) {
