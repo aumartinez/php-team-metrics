@@ -7,7 +7,7 @@ class Login extends Controller {
   public function __construct($controller, $method) {
     parent::__construct($controller, $method);
     
-    session_start();
+    session_start();    
     
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Dbmodel");
@@ -20,8 +20,8 @@ class Login extends Controller {
   # Each method will request the model to present the local resource
   public function index() {        
     if (isset($_SESSION["logged"])) {      
-      $this->build_page("home");
       unset($_SESSION["logged"]);
+      header("Location:/". PATH ."/cpanel");      
     }
     else {                  
       # If errors are returned
