@@ -25,7 +25,7 @@ define ("NOT_FOUND", "not_found");
 # Required values
 define ("LOGIN_REQUIRED", 
         array(
-          "email",
+          "user",
           "password"
         ));
 

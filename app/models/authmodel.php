@@ -31,12 +31,12 @@ class Authmodel extends Dbmodel {
   }
   
   # Auth user
-  public function auth_user($email, $pass) {
-    if ($email && pass) {
+  public function auth_user($user, $pass) {
+    if ($user && pass) {
       $this->user = $user;
       $this->pass = $pass;
       
-      if ($this->user == "admin" && $this->pass = "123") {
+      if ($this->user == "admin" && $this->pass == "123") {
         $this->is_logged = true;
         $_SESSION["logged"] = true;
         
