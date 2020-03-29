@@ -46,7 +46,13 @@ class Login extends Controller {
   
   # Not found handler
   public function not_found() {
-    $this->build_page("404");
+    $this->build_page("404");    
+    
+    session_unset();
+    session_destroy();
+    session_write_close();
+    setcookie(session_name(),'',0,'/');
+    session_regenerate_id(true);
   }
   
   # Controller/Model/View link
