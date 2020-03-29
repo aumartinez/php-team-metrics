@@ -3,12 +3,11 @@
 class Dbmodel {
     
   protected $sql;
-  protected $rows = array();
-  
-  private $conx;
+  protected $rows = array();  
+  protected $conx;
   
   # Open DB link
-  private function open_link() {
+  protected function open_link() {
     $this->conx = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
     if ($this->conx->connect_errno) {
       echo "Failed to connect to MySQL: " . $this->conx->connect_error;
@@ -19,7 +18,7 @@ class Dbmodel {
   }
   
   # Close DB link
-  private function close_link() {
+  protected function close_link() {
     $this->conx->close();
   }
   
