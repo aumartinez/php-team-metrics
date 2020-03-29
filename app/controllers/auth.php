@@ -29,6 +29,7 @@ class Auth extends Controller {
     # Initialize methods
     $this->get_model("Authmodel")->login_required();
     $this->get_model("Authmodel")->sanitize_post();
+    $this->get_model("Authmodel")->auth_user($this->get_model("Authmodel")->sanitized["user"], $this->get_model("Authmodel")->sanitized["password"]);
   }
  
    

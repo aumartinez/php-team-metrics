@@ -20,7 +20,6 @@ class Login extends Controller {
   # Each method will request the model to present the local resource
   public function index() {        
     if (isset($_SESSION["logged"])) {      
-      unset($_SESSION["logged"]);
       header("Location:/". PATH ."/cpanel");      
     }
     else {                  

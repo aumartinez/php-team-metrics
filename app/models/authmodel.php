@@ -1,7 +1,10 @@
 <?php
 
 class Authmodel extends Dbmodel {
-  protected $sanitized = array();  
+  public $sanitized = array();  
+  public $user;
+  public $pass;
+  public $is_logged = false;  
   
   public function login_required() {
     $required = LOGIN_REQUIRED;
@@ -25,6 +28,29 @@ class Authmodel extends Dbmodel {
     }
     
     return $this->sanitized;
+  }
+  
+  # Auth user
+  public function auth_user($user, $pass) {
+    if ($user && pass) {
+      $this->user = $user;
+      $this->pass = $pass;
+      
+      if ($this->user == "admin" && $this->pass = "123") {
+        $this->is_logged = true;
+        $_SESSION["logged"] = true;
+        
+        $this->redirect(PATH . "/cpanel");
+      }
+      else {
+        $_SESSION["error"][] = "User/Password don't match";
+      }
+    }
+    else {
+      $_SESSION["error"][] = "Couldn't authenticate user";
+    }
+    
+    $this->error_check();
   }
   
   # Error check method
