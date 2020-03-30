@@ -21,7 +21,7 @@ class Login extends Controller {
   public function index() {        
     if (isset($_SESSION["logged"])) {      
       header("Location:/". PATH ."/cpanel");
-      exit("Logged");
+      exit();
     }
     else {                  
       # If errors are returned
