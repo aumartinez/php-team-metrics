@@ -3,7 +3,7 @@
 $(document).ready(function(){
   //To do
     
-  $("#login-form").submit(function(evt){    
+  $("#register-form").submit(function(evt){    
     $(".loader").addClass("active");
     var errors = validateForm();
     
@@ -40,6 +40,10 @@ $(document).ready(function(){
     var arr = [];
         
     //Required fields    
+    if ($("#first-name").val().length == 0) {
+      arr.push("first-name");
+    }
+    
     if ($("#user").val().length == 0) {
       arr.push("user");
     }
