@@ -58,14 +58,7 @@ class Register extends Controller {
   # Not found handler
   public function not_found() {
     # 404 page
-    $this->build_page("404");    
-    
-    # Clear session
-    session_unset();
-    session_destroy();
-    session_write_close();
-    setcookie(session_name(),'',0,'/');
-    session_regenerate_id(true);
+    $this->build_page("404");
   }
   
   # Controller/Model/View link
