@@ -8,7 +8,7 @@ class Register extends Controller {
     parent::__construct($controller, $method);
     
     session_start();
-    
+            
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Dbmodel");
     $this->load_model("Pagemodel");
@@ -18,12 +18,22 @@ class Register extends Controller {
   }
   
   # Each method will request the model to present the local resource
-  public function index() {    
+  public function index() {
     
     if (isset($_SESSION["logged"])) {      
       header("Location:/". PATH ."/cpanel");      
     }
-    else {                  
+    else {
+      # If referred from Login page, clear session variables
+      $url = $_SERVER["HTTP_REFERER"];
+      $url_array = explode("/", trim($url, "/"));
+      
+      $referrer = array_pop($url_array);
+      
+      if ($referrer == "login") {
+        session_unset();
+      }
+    
       # If errors are returned
       $err_key = "REGISTER_ERROR";
       $err_mess = "";
