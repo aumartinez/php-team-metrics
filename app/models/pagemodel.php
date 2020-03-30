@@ -152,11 +152,15 @@ class Pagemodel extends Dbmodel {
   }
   
   # Add bottom JS scripts
-  protected function get_scripts($page_name) {      
+  protected function get_scripts($page_name) {    
     $html = "";
     
     if (file_exists(HTML . DS . "temp" . DS . $page_name . "scripts.html")) {
-      $html .= file_get_contents(HTML . DS . "temp" . DS . $page_name ."scripts.html");
+      $html .= file_get_contents(HTML . DS . "temp" . DS . $page_name ."-scripts.html");
+      $html .= "\n";
+    }
+    else if (file_exists(HTML . DS . "temp" . DS . "scripts.html")) {
+      $html .= file_get_contents(HTML . DS . "temp" . DS ."scripts.html");
       $html .= "\n";
     }
     
