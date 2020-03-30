@@ -22,6 +22,13 @@ define ("DEFAULT_CONTROLLER", "login");
 define ("DEFAULT_METHOD", "index");
 define ("NOT_FOUND", "not_found");
 
+# Locales
+define ("LOCALES", 
+        array(
+          "SITE_ROOT" => SITE_ROOT,
+          "MEDIA" => MEDIA
+        ));
+
 # Required values
 define ("LOGIN_REQUIRED", 
         array(

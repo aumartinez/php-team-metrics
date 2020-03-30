@@ -27,10 +27,7 @@ class Pageview extends View {
   
   # Keyword list
   protected function build_locales() {
-    $this->locales = array(
-      "SITE_ROOT" => SITE_ROOT,
-      "MEDIA" => MEDIA
-    );
+    $this->locales = LOCALES;    
     
     return $this->locales;
   }

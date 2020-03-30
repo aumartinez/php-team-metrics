@@ -161,7 +161,8 @@ a.btn-primary:hover {
 
 /* Content */
 
-section.body {
+#register section.body,
+#login section.body {
   height: 100%;
 }
 

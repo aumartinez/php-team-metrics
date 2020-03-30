@@ -25,7 +25,7 @@ class Register extends Controller {
     }
     else {                  
       # If errors are returned
-      $err_key = "LOGIN_ERROR";
+      $err_key = "REGISTER_ERROR";
       $err_mess = "";
       
       if (isset($_SESSION["error"]) && isset($_SESSION["submit-form"])){
