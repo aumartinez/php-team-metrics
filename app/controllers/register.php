@@ -39,7 +39,7 @@ class Register extends Controller {
       $err_mess = "";
       
       if (isset($_SESSION["error"]) && isset($_SESSION["submit-form"])){
-        unset($_SESSION["form"]);
+        unset($_SESSION["submit-form"]);
         
         $err_mess = "\n";
         $err_mess .= "Errors found!";
