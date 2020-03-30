@@ -3,8 +3,7 @@
 class Authmodel extends Dbmodel {
   public $sanitized = array();  
   public $user;
-  public $pass;
-  public $is_logged = false;  
+  public $pass;  
   
   public function login_required() {
     $required = LOGIN_REQUIRED;
@@ -32,12 +31,11 @@ class Authmodel extends Dbmodel {
   
   # Auth user
   public function auth_user($user, $pass) {
-    if ($user && pass) {
+    if ($user && $pass) {
       $this->user = $user;
       $this->pass = $pass;
       
-      if ($this->user == "admin" && $this->pass == "123") {
-        $this->is_logged = true;
+      if ($this->user == "admin" && $this->pass == "123") {        
         $_SESSION["logged"] = true;
         
         $this->redirect(PATH . "/cpanel");

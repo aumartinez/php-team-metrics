@@ -10,8 +10,7 @@ class Cpanel extends Controller {
     session_start();
     
     # Any models required to interact with this controller should be loaded here    
-    $this->load_model("Dbmodel");
-    $this->load_model("Authmodel");
+    $this->load_model("Dbmodel");    
     $this->load_model("Pagemodel");
     
     # Instantiate custom view output
@@ -33,12 +32,6 @@ class Cpanel extends Controller {
   public function not_found() {
     # 404 page
     $this->build_page("404");    
-    
-    # Clear session
-    session_unset();
-    session_destroy();
-    session_write_close();
-    setcookie(session_name(),'',0,'/');    
   }
   
   # Controller/Model/View link

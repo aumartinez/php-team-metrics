@@ -194,6 +194,8 @@ section.body .form-wrapper {
   border: none;
   background-color: transparent;
   color: #aaa;
+  z-index: 1;
+  cursor: pointer;
 }
 
 .login-logo {

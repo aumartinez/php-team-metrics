@@ -21,7 +21,7 @@ $(document).ready(function(){
   
   var clicked = false;
   
-  $("#view-password").click(function(){    
+  $("#view-password").click(function(){   
     if (clicked == false){
       $("#password").attr("type", "text");
       $("#view-password i").removeClass("fa-eye");
