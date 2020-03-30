@@ -22,7 +22,7 @@ define ("DEFAULT_CONTROLLER", "login");
 define ("DEFAULT_METHOD", "index");
 define ("NOT_FOUND", "not_found");
 
-# Locales
+# Startup Locales
 define ("LOCALES", 
         array(
           "SITE_ROOT" => SITE_ROOT,

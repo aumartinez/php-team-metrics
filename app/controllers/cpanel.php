@@ -11,6 +11,7 @@ class Cpanel extends Controller {
     
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Dbmodel");
+    $this->load_model("Authmodel");
     $this->load_model("Pagemodel");
     
     # Instantiate custom view output
