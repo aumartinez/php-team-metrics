@@ -53,7 +53,7 @@
                   <label for="user">
                     User name: <span class="required">*</span>
                   </label>
-                  <input class="form-control" type="text" id="user" name="user" placeholder="user" />
+                  <input class="form-control" type="text" id="user" name="user" placeholder="user name" />
                   <p class="error-mess">
                     User name is required
                   </p>
@@ -73,10 +73,23 @@
                   <label for="password">
                     Password: <span class="required">*</span>
                   </label>
-                  <button id="view-password" type="button" class="view-pass"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                  <p id="view-password" class="view-pass"><i class="fa fa-eye" aria-hidden="true"></i></p>
                   <input class="form-control" type="password" id="password" name="password" placeholder="password" />
                   <p class="error-mess">
                     Password is required
+                  </p>
+                </div>
+                
+                <div class="form-group">
+                  <label for="verify">
+                    Verify Password: <span class="required">*</span>
+                  </label>
+                  <input class="form-control" type="password" id="verify" name="verify" />
+                  <p class="errorMess">
+                    Passwords don't match
+                  </p>
+                  <p>
+                    <small>min 6 characters length</small>
                   </p>
                 </div>
                 

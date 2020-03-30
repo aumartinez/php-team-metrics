@@ -162,7 +162,6 @@ a.btn-primary:hover {
 /* Content */
 
 #not-found section.body,
-#register section.body,
 #login section.body {
   height: 100%;
 }
