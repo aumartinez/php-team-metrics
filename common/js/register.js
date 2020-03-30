@@ -19,6 +19,7 @@ $(document).ready(function(){
     }
   });
   
+  //Reveal password widget
   var clicked = false;
   
   $("#view-password").click(function(){   
