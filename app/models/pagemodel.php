@@ -155,7 +155,7 @@ class Pagemodel extends Dbmodel {
   protected function get_scripts($page_name) {    
     $html = "";
     
-    if (file_exists(HTML . DS . "temp" . DS . $page_name . "scripts.html")) {
+    if (file_exists(HTML . DS . "temp" . DS . $page_name . "-scripts.html")) {
       $html .= file_get_contents(HTML . DS . "temp" . DS . $page_name ."-scripts.html");
       $html .= "\n";
     }

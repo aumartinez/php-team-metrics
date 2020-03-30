@@ -39,7 +39,7 @@ define ("LOGIN_REQUIRED",
 # Excluded pages
 define ("EXCLUDED_PAGES",
         array(
-          "404",
+          "not-found",
           "login",
           "register"
         ));

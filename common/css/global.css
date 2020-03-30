@@ -161,6 +161,7 @@ a.btn-primary:hover {
 
 /* Content */
 
+#not-found section.body,
 #register section.body,
 #login section.body {
   height: 100%;
@@ -196,6 +197,7 @@ section.body .form-wrapper {
   color: #aaa;
   z-index: 1;
   cursor: pointer;
+  margin: 0;
 }
 
 .login-logo {
