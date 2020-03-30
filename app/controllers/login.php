@@ -45,6 +45,11 @@ class Login extends Controller {
     }    
   }
   
+  # Start setup on application launch
+  private function startup() {
+  
+  }
+  
   # Not found handler
   public function not_found() {
     # 404 page
@@ -54,7 +59,7 @@ class Login extends Controller {
     session_unset();
     session_destroy();
     session_write_close();
-    setcookie(session_name(),'',0,'/');    
+    setcookie(session_name(), "",0, "/");    
   }
   
   # Controller/Model/View link
