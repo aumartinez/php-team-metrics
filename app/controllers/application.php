@@ -24,7 +24,15 @@ class Application {
   # If set, unregister any global constant
   private function unregister_globals() {
     if (ini_get("register_globals")) {
-      $array = array("_SESSION", "_POST", "_GET", "_REQUEST", "_SERVER", "_ENV", "_FILES");
+      $array = array(
+            "_SESSION", 
+            "_POST", 
+            "_GET", 
+            "_REQUEST", 
+            "_SERVER", 
+            "_ENV", 
+            "_FILES"
+            );
       
       foreach ($array as $value) {
         foreach ($GLOBALS[$value] as $key => $var) {
