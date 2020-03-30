@@ -1,8 +1,8 @@
 <?php
 
 # Load config
-require_once(ROOT . DS . "config" . DS . "config.php");
-require_once(ROOT . DS . "core" . DS . "functions.php");
+require_once (ROOT . DS . "config" . DS . "config.php");
+require_once (ROOT . DS . "core" . DS . "functions.php");
 
 # Autoloader
 spl_autoload_register(function ($class_name) {
