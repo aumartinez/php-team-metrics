@@ -6,17 +6,28 @@ class Dbmodel {
   protected $rows = array();  
   protected $conx;
   
+  # Test if DBNAME exists
+  public function test_db() {
+    $this->conx = new mysqli(DBHOST, DBUSER, DBPASS);
+    if ($this->conx->connect_errno) {
+      echo "Failed to connect to MySQL: " . $this->conx->connect_error;      
+      exit();
+    }
+    
+    return $this->conx->select_db(DBNAME);
+  }  
+  
   # Open DB link
-  protected function open_link() {
+  protected function open_link() {  
     $this->conx = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
     if ($this->conx->connect_errno) {
-      echo "Failed to connect to MySQL: " . $this->conx->connect_error;
+      echo "Failed to connect to MySQL: " . $this->conx->connect_error;      
       exit();
     }
     
     return $this->conx;
   }
-  
+    
   # Close DB link
   protected function close_link() {
     $this->conx->close();
