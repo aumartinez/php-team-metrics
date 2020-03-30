@@ -20,20 +20,37 @@ $(document).ready(function(){
   });
   
   //Reveal password widget
-  var clicked = false;
+  var passclicked = false;
   
   $("#view-password").click(function(){   
-    if (clicked == false){
+    if (passclicked == false){
       $("#password").attr("type", "text");
       $("#view-password i").removeClass("fa-eye");
       $("#view-password i").addClass("fa-eye-slash");
-      clicked = true;
+      passclicked = true;
     }
     else {
       $("#password").attr("type", "password");
       $("#view-password i").removeClass("fa-eye-slash");
       $("#view-password i").addClass("fa-eye");
-      clicked = false;
+      passclicked = false;
+    }
+  });
+  
+  var verifyclicked = false;
+  
+  $("#view-match").click(function(){   
+    if (verifyclicked == false){
+      $("#verify").attr("type", "text");
+      $("#view-match i").removeClass("fa-eye");
+      $("#view-match i").addClass("fa-eye-slash");
+      verifyclicked = true;
+    }
+    else {
+      $("#verify").attr("type", "password");
+      $("#view-match i").removeClass("fa-eye-slash");
+      $("#view-match i").addClass("fa-eye");
+      verifyclicked = false;
     }
   });
   

@@ -226,3 +226,7 @@ section.body .form-wrapper {
 .loader.active {
   display: block;
 }
+
+form div.form-group:last-child {
+  margin-top: 30px;
+}
