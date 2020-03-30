@@ -179,6 +179,7 @@ section.body .form-wrapper {
   padding: 60px 0;
 }
 
+#register-form legend,
 #login-form legend {
   font-size: 36px;
 }
