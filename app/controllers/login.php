@@ -7,7 +7,7 @@ class Login extends Controller {
   public function __construct($controller, $method) {
     parent::__construct($controller, $method);
     
-    session_start();    
+    session_start();
     
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Dbmodel");
@@ -15,6 +15,9 @@ class Login extends Controller {
     
     # Instantiate custom view output
     $this->output = new Pageview();
+    
+    # Start methods
+    $this->startup(); 
   }
   
   # Each method will request the model to present the local resource
@@ -46,8 +49,10 @@ class Login extends Controller {
   }
   
   # Start setup on application launch
-  private function startup() {
-  
+  private function startup() {              
+    if(!$this->get_model("Dbmodel")->test_db()){
+      $this->get_model("Pagemodel")->first_run();
+    }
   }
   
   # Not found handler
