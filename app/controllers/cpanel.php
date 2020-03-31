@@ -31,7 +31,7 @@ class Cpanel extends Controller {
   # Not found handler
   public function not_found() {
     # 404 page
-    $this->build_page("404");    
+    $this->build_page("not-found");    
   }
   
   # Controller/Model/View link
