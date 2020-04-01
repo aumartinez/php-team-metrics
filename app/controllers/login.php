@@ -12,6 +12,7 @@ class Login extends Controller {
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Dbmodel");
     $this->load_model("Pagemodel");
+    $this->load_model("Startupmodel");
     
     # Instantiate custom view output
     $this->output = new Pageview();
@@ -51,7 +52,7 @@ class Login extends Controller {
   # Start setup on application launch
   private function startup() {              
     if(!$this->get_model("Dbmodel")->test_db()){
-      $this->get_model("Pagemodel")->first_run();
+      $this->get_model("Startupmodel")->first_run();
     }
   }
   
