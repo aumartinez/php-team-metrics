@@ -53,6 +53,14 @@ class Login extends Controller {
   private function startup() {              
     if(!$this->get_model("Dbmodel")->test_db()){
       $this->get_model("Startupmodel")->first_run();
+      
+      if (file_exists(ROOT . DS . "core" . DS . "config" . DS . "createtables.sql")) {
+        $sql = file_get_contents(ROOT . DS . "core" . DS . "config" . DS . "createtables.sql");
+        $this->get_model("Startupmodel")->setup_tables();
+      }
+      else {
+        $this->build_page("db-error");
+      }
     }
   }
   
