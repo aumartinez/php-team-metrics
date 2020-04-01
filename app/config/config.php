@@ -41,6 +41,7 @@ define ("EXCLUDED_PAGES",
         array(
           "not-found",
           "login",
-          "register"
+          "register",
+          "db-error"
         ));
 ?>
