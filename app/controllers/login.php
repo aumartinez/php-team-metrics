@@ -50,13 +50,13 @@ class Login extends Controller {
   }
   
   # Start setup on application launch
-  private function startup() {              
+  private function startup() {
     if(!$this->get_model("Dbmodel")->test_db()){
       $this->get_model("Startupmodel")->first_run();
       
-      if (file_exists(ROOT . DS . "core" . DS . "config" . DS . "createtables.sql")) {
-        $sql = file_get_contents(ROOT . DS . "core" . DS . "config" . DS . "createtables.sql");
-        $this->get_model("Startupmodel")->setup_tables();
+      if (file_exists(ROOT . DS . "config" . DS . "createtables.sql")) {
+        $sql = file_get_contents(ROOT . DS . "config" . DS . "createtables.sql");
+        $this->get_model("Startupmodel")->setup_tables($sql);
       }
       else {
         $this->build_page("db-error");
