@@ -24,7 +24,9 @@ class Dbmodel {
   
   # Create DB
   protected function create_db($dbname) {    
-    $sql = "CREATE DATABASE '{$dbname}' CHARSET = utf8 COLLATE = utf8_unicode_ci";
+    $sql = "CREATE DATABASE '{$dbname}'
+            CHARACTER SET utf8 
+            COLLATE utf8_unicode_ci";
     $this->set_query($sql);    
   }
   
