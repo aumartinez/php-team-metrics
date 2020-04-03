@@ -6,28 +6,17 @@ class Dbmodel {
   protected $rows = array();  
   protected $conx;
   
-  # Test if DBNAME exists
-  public function test_db() {
-    $this->conx = new mysqli(DBHOST, DBUSER, DBPASS);
-    if ($this->conx->connect_errno) {
-      echo "Failed to connect to MySQL: " . $this->conx->connect_error;      
-      exit();
-    }
-    
-    return $this->conx->select_db(DBNAME);
-  }  
-  
   # Open DB link
-  protected function open_link() {  
+  protected function open_link() {
     $this->conx = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
     if ($this->conx->connect_errno) {
-      echo "Failed to connect to MySQL: " . $this->conx->connect_error;      
+      echo "Failed to connect to MySQL: " . $this->conx->connect_error;
       exit();
     }
     
     return $this->conx;
   }
-    
+  
   # Close DB link
   protected function close_link() {
     $this->conx->close();
@@ -35,7 +24,7 @@ class Dbmodel {
   
   # Create DB
   protected function create_db($dbname) {    
-    $sql = "CREATE DATABASE '{$dbname}'";
+    $sql = "CREATE DATABASE '{$dbname}' CHARSET = utf8 COLLATE = utf8_unicode_ci";
     $this->set_query($sql);    
   }
   
