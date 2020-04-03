@@ -7,15 +7,6 @@ class Pagemodel extends Dbmodel {
   public $site_title = WEB_TITLE;
   public $page_title = "";
   
-  # First run setup
-  public function first_run() {
-    $dbname = DBNAME;    
-    $this->create_db($dbname);
-    
-    
-    $this->set_query($sql);
-  }
-  
   # With page name locate resources, put them together and return it 
   # to the controller
   public function get_page($page_name) {        
