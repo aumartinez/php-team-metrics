@@ -8,6 +8,7 @@ class Cpanel extends Controller {
     parent::__construct($controller, $method);
     
     session_start();
+    session_regenerate_id();
     
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Dbmodel");    
