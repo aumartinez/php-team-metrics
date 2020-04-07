@@ -38,7 +38,8 @@ class Dbmodel {
   protected function create_db($dbname) {    
     $sql = "CREATE DATABASE {$dbname}
             CHARACTER SET utf8
-            COLLATE utf8_unicode_ci";    
+            COLLATE utf8_unicode_ci";
+            
     $this->dblink = new mysqli(DBHOST, DBUSER, DBPASS);
     if (!$this->dblink->query($sql) == true) {
       echo $this->dblink->error;
