@@ -9,10 +9,6 @@
   box-sizing: border-box;
 }
 
-html {
-  height: 100%;
-}
-
 body{
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -125,8 +121,12 @@ a.btn-primary:hover {
   cursor: pointer;
 }
 
-#error-div {
-  color: red;
+#error-div {  
+  display: none;
+}
+
+#error-div.active {
+  display: block;
 }
 
 .error-mess {
@@ -170,11 +170,12 @@ a.btn-primary:hover {
 .full-height,
 section.body .full-height .wrapper,
 section.body .form-wrapper {
-  height: 100vh;
+  height: 100%;
 }
 
-/* Login */
+/* Forms */
 
+#startup-form,
 #register-form,
 #login-form {
   padding: 60px 0;
@@ -231,4 +232,10 @@ section.body .form-wrapper {
 
 form div.form-group:last-child {
   margin-top: 30px;
+}
+
+/* Start up */
+
+.alert {
+  border-radius: 0;
 }
