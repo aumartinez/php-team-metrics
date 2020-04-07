@@ -90,7 +90,7 @@ $(document).ready(function(){
     
     //Validate password complexity (1 letter, 1 number)
     var password = $("#password").val();
-    var input = /^(?=.*[0-9]$)(?=.*[a-zA-Z])/;
+    var input = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
     var testPass = input.exec(password);
     
     if (!testPass) {
