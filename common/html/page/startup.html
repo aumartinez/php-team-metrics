@@ -11,7 +11,7 @@
                   Startup
                 </legend>
                 
-                <div id="error-div">
+                <div id="error-div" class="alert alert-danger">
                   {$STARTUP_ERROR$}
                 </div>
                 
@@ -25,7 +25,7 @@
                   </label>
                   <input class="form-control" type="text" id="email" name="email" placeholder="Email" />
                   <p class="error-mess">
-                    Email is required
+                    Valid email is required
                   </p>
                 </div>
                 
@@ -46,7 +46,7 @@
                   <p id="view-password" class="view-pass"><i class="fa fa-eye" aria-hidden="true"></i></p>
                   <input class="form-control" type="password" id="password" name="password" placeholder="password" />
                   <p class="error-mess">
-                    Password is required
+                    Password is required (at least 1 letter 1 number)
                   </p>
                 </div>
                 
@@ -54,10 +54,13 @@
                   <label for="verify">
                     Verify Password: <span class="required">*</span>
                   </label>
-                  <p id="view-verify" class="view-pass"><i class="fa fa-eye" aria-hidden="true"></i></p>
+                  <p id="view-match" class="view-pass"><i class="fa fa-eye" aria-hidden="true"></i></p>
                   <input class="form-control" type="password" id="verify" name="verify" placeholder="Verify password" />
                   <p class="error-mess">
-                    Password is required
+                    Passwords don't match
+                  </p>
+                  <p>
+                    <small>min 6 characters length</small>
                   </p>
                 </div>              
                 
