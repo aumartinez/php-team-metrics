@@ -40,6 +40,7 @@ define ("LOGIN_REQUIRED",
 define ("EXCLUDED_PAGES",
         array(
           "not-found",
+          "startup",
           "login",
           "register",
           "db-error"
