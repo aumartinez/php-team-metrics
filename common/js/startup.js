@@ -55,23 +55,23 @@ $(document).ready(function(){
   
   
   function validateForm() {    
-    var arr = [];
+    var err = [];
         
     //Required fields
     if ($("#email").val().length == 0) {
-      arr.push("email");
+      err.push("email");
     }
     
     if ($("#user").val().length == 0) {
-      arr.push("user");
+      err.push("user");
     }
     
     if ($("#password").val().length == 0) {
-      arr.push("password");
+      err.push("password");
     }
     
     if ($("#verify").val().length == 0) {
-      arr.push("verify");
+      err.push("verify");
     }
         
     //Validate email
@@ -79,11 +79,30 @@ $(document).ready(function(){
     var regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var testEmail = regExp.exec(email);
     
-    if (!testEmail) {
-       arr.push("email");
+    if (!testEmail) {       
+       console.log("error");
     }
     
-    return arr;
+    //Validate password length
+    if($("#password").val().length < 6) {
+      err.push("password");
+    }
+    
+    //Validate password complexity (1 letter, 1 number)
+    var password = $("#password").val();
+    var input = /^(?=.*[0-9]$)(?=.*[a-zA-Z])/;
+    var testPass = input.exec(password);
+    
+    if (!testPass) {
+      err.push("password");
+    }
+    
+    //Validate password match
+    if($("#password").val() !== $("#verify").val()) {
+      err.push("verify");
+    }
+    
+    return err;
   }
   
   function displayErrors(errors) {
