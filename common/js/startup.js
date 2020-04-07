@@ -73,6 +73,15 @@ $(document).ready(function(){
     if ($("#verify").val().length == 0) {
       arr.push("verify");
     }
+        
+    //Validate email
+    var email = $("#email").val();
+    var regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var testEmail = regExp.exec(email);
+    
+    if (!testEmail) {
+       arr.push("email");
+    }
     
     return arr;
   }
