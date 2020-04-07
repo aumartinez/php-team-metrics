@@ -161,6 +161,7 @@ a.btn-primary:hover {
 
 /* Content */
 
+#startup section.body,
 #not-found section.body,
 #login section.body {
   height: 100%;
@@ -169,7 +170,7 @@ a.btn-primary:hover {
 .full-height,
 section.body .full-height .wrapper,
 section.body .form-wrapper {
-  height: 100%;
+  height: 100vh;
 }
 
 /* Login */
