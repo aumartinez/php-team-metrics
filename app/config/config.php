@@ -30,6 +30,14 @@ define ("LOCALES",
         ));
 
 # Required values
+
+define ("LOGIN_REQUIRED", 
+        array(
+        "email",
+        "user",        
+        "password"
+        ));
+ 
 define ("LOGIN_REQUIRED", 
         array(
           "user",
