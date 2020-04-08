@@ -1,40 +1,85 @@
 <?php
 
-class Auth extends Controller {
+class Authmodel extends Dbmodel {
+  public $sanitized = array();  
+  public $user_name;
+  public $user_firstname;
+  public $user_lastname;
+  public $employee_id;
+  public $team_id;
+  public $position_name;
+  public $password;
+  public $salt;
+  public $user_pic;
+  public $email;
+  public $account_name;
+  public $user_access;
   
-  public function __construct($controller, $method) {
-    parent::__construct($controller, $method);
+  public function login_required() {
+    $required = LOGIN_REQUIRED;
     
-    session_start();
-    
-    # Any models required to interact with this controller should be loaded here    
-    $this->load_model("Authmodel");    
-  }
-  
-  public function login() {
-    
-    # Check if referred URI is coming from login form
-    if (!isset($_POST["submit-form"])) {
-      $this->not_found();
+    # Check required fields
+    foreach ($required as $value) {
+      if (!isset($_POST[$value]) || $_POST[$value] == "") {
+        $_SESSION["error"][] = $value . " is required";
+      }
     }
     
-    $_SESSION["submit-form"] = true;
+    $this->error_check();
+  }
+  
+  # Global sanitize method
+  public function sanitize_post() {
+    $this->sanitized = array();
     
-    if (isset($_SESSION["error"])) {
-      unset($_SESSION["error"]);
+    foreach ($_POST as $key => $value) {
+      $this->sanitized[$key] = $this->open_link()->real_escape_string($value);
     }
     
-    $_SESSION["error"] = array();
-    
-    # Initialize methods
-    $this->get_model("Authmodel")->login_required();
-    $this->get_model("Authmodel")->sanitize_post();
-    $this->get_model("Authmodel")->auth_user($this->get_model("Authmodel")->sanitized["user"], $this->get_model("Authmodel")->sanitized["password"]);
+    return $this->sanitized;
   }
- 
-   
-  public function not_found() {
-    $this->get_model("Authmodel")->redirect(PATH . "/login");
+  
+  # Auth system admin at startup
+  public function auth_admin()
+  
+  # Auth user
+  public function auth_user($user, $pass) {
+    if ($user && $pass) {
+      $this->user = $user;
+      $this->pass = $pass;
+      
+      if ($this->user == "admin" && $this->pass == "123") {        
+        $_SESSION["logged"] = true;
+        
+        $this->redirect(PATH . "/cpanel");
+      }
+      else {
+        $_SESSION["error"][] = "User/Password don't match";
+      }
+    }
+    else {
+      $_SESSION["error"][] = "Couldn't authenticate user";
+    }
+    
+    $this->error_check();
+  }
+  
+  # Auth registration
+  public function auth_register() {
+  
+  }
+  
+  # Error check method
+  protected function error_check() {
+    if (count($_SESSION["error"]) > 0) {
+      error_log("Error validating form", 0);
+      $this->redirect(PATH . "/login");
+    }
+  }
+  
+  public function redirect($page) {
+    header ("Location: /" . $page);
+    exit();
   }
   
 }
