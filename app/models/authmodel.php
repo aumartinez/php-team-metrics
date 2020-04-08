@@ -2,11 +2,35 @@
 
 class Authmodel extends Dbmodel {
   public $sanitized = array();  
-  public $user;
-  public $pass;  
+  public $user_name;
+  public $user_firstname;
+  public $user_lastname;
+  public $employee_id;
+  public $team_id;
+  public $position_name;
+  public $password;
+  public $salt;
+  public $user_pic;
+  public $email;
+  public $account_name;
+  public $user_access;
   
+  # Required fields auth
   public function login_required() {
     $required = LOGIN_REQUIRED;
+    
+    # Check required fields
+    foreach ($required as $value) {
+      if (!isset($_POST[$value]) || $_POST[$value] == "") {
+        $_SESSION["error"][] = $value . " is required";
+      }
+    }
+    
+    $this->error_check();
+  }
+  
+  public function sysadmin_required() {
+    $required = SYS_REQUIRED;
     
     # Check required fields
     foreach ($required as $value) {
@@ -28,6 +52,9 @@ class Authmodel extends Dbmodel {
     
     return $this->sanitized;
   }
+  
+  # Auth system admin at startup
+  public function auth_admin()
   
   # Auth user
   public function auth_user($user, $pass) {
@@ -51,6 +78,25 @@ class Authmodel extends Dbmodel {
     $this->error_check();
   }
   
+  # Additional validations
+  public function sysadmin_validate() {    
+    if (isset($_POST["email"]) && $_POST["email"] != "") {
+      if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+        $_SESSION["error"][] = "Email is invalid.";
+      }
+    }
+    
+    if (isset($_POST["password"]) && $_POST["password"] != "") {
+      if (isset($_POST["verify"]) && $_POST["verify"] != ""){
+        if ($_POST["password"] != $_POST["verify"]) {
+          $_SESSION["error"][] = "Passwords don't match.";
+        }
+      }
+    }
+    
+    $this->error_check();
+  }
+  
   # Error check method
   protected function error_check() {
     if (count($_SESSION["error"]) > 0) {
@@ -62,6 +108,15 @@ class Authmodel extends Dbmodel {
   public function redirect($page) {
     header ("Location: /" . $page);
     exit();
+  }
+  
+  # Auth registration
+  public function sysadmin_register() {
+    
+  }
+  
+  public function auth_register() {
+  
   }
   
 }
