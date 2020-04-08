@@ -44,17 +44,23 @@ class Authmodel extends Dbmodel {
   
   # Global sanitize method
   public function sanitize_post() {
-    $this->sanitized = array();
+    $this->sanitized = array();      
     
     foreach ($_POST as $key => $value) {
-      $this->sanitized[$key] = $this->open_link()->real_escape_string($value);
+      $clear = trim($value);
+      $clear = stripslashes($clear);
+      $clear = htmlspecialchars($clear);
+      
+      $this->sanitized[$key] = $this->open_link()->real_escape_string($clear);
     }
     
     return $this->sanitized;
   }
   
   # Auth system admin at startup
-  public function auth_admin()
+  public function auth_admin() {
+  
+  }
   
   # Auth user
   public function auth_user($user, $pass) {
@@ -86,10 +92,19 @@ class Authmodel extends Dbmodel {
       }
     }
     
+    $test = $_POST["password"];
+    $patt = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
+    
     if (isset($_POST["password"]) && $_POST["password"] != "") {
       if (isset($_POST["verify"]) && $_POST["verify"] != ""){
         if ($_POST["password"] != $_POST["verify"]) {
           $_SESSION["error"][] = "Passwords don't match.";
+        }
+        else if (strlen($_POST["password"]) < 6 || strlen($_POST["verify"]) < 6) {
+          $_SESSION["error"][] = "Passwords should be at least 6 characters."
+        }
+        else if (!preg_match($patt, $test) {
+        
         }
       }
     }
