@@ -11,6 +11,8 @@ class Auth extends Controller {
       unset($_SESSION["error"]);
     }
     
+    $_SESSION["error"] = array();
+    
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Authmodel");    
   }
