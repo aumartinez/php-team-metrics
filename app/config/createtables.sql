@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS positions (
   id INT NOT NULL AUTO_INCREMENT,
   position_name VARCHAR(50) NOT NULL,
   user_access INT NOT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
   UNIQUE (position_name)
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci AUTO_INCREMENT = 1;
 
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR(255) NOT NULL,
   account_name VARCHAR(50) NOT NULL,
   user_access CHAR(1) NOT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
   UNIQUE (user_name)
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci AUTO_INCREMENT = 1;
 
