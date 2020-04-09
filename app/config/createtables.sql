@@ -2,20 +2,23 @@
 
 CREATE TABLE IF NOT EXISTS Accounts (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  account_name VARCHAR(255) NOT NULL
+  account_name VARCHAR(255) NOT NULL,
+  PRIMARY KEY (account_name)
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci AUTO_INCREMENT = 1;
 
 CREATE TABLE IF NOT EXISTS Positions (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   position_name VARCHAR(255) NOT NULL,
-  user_access CHAR(1) NOT NULL
+  user_access CHAR(1) NOT NULL,
+  PRIMARY KEY (position_name)
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci AUTO_INCREMENT = 1;
 
 CREATE TABLE IF NOT EXISTS Teams (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   team_id VARCHAR(255) NOT NULL,
   team_name VARCHAR(255) NOT NULL,
-  account_name VARCHAR(255) NOT NULL  
+  account_name VARCHAR(255) NOT NULL,
+  PRIMARY KEY (team_id)
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci AUTO_INCREMENT = 1;
 
 CREATE TABLE IF NOT EXISTS GlobalMetrics (
@@ -23,7 +26,7 @@ CREATE TABLE IF NOT EXISTS GlobalMetrics (
   team_id VARCHAR(255) NOT NULL,
   metric_name VARCHAR(255) NOT NULL,
   site_goal DECIMAL NOT NULL,
-  team_goal DECIMAL NOT NULL
+  team_goal DECIMAL NOT NULL,  
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci AUTO_INCREMENT = 1;
 
 CREATE TABLE IF NOT EXISTS UserMetrics (
@@ -36,7 +39,7 @@ CREATE TABLE IF NOT EXISTS UserMetrics (
   sign_date DATETIME NOT NULL,
   week_num INT NOT NULL,
   date_num INT NOT NULL,
-  year_num INT NOT NULL
+  year_num INT NOT NULL  
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci AUTO_INCREMENT = 1;
 
 CREATE TABLE IF NOT EXISTS Users (
@@ -54,6 +57,7 @@ CREATE TABLE IF NOT EXISTS Users (
   email VARCHAR(255) NOT NULL,
   account_name VARCHAR(255) NOT NULL,
   user_access CHAR(1) NOT NULL
+  PRIMARY KEY (user_name, employee_id, email)
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8 COLLATE = utf8_unicode_ci AUTO_INCREMENT = 1;
 
 CREATE TABLE IF NOT EXISTS ResetPassword (
