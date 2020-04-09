@@ -1,5 +1,5 @@
     <section class="body">
-      <div class="container bg-white form-wrapper">
+      <div class="container bg-white form-wrapper" {$STYLE$}>
         <div class="row">
           <div class="col-sm-4 col-center">            
             <form id="startup-form" action="{$SITE_ROOT$}/auth/startup" method="post">
@@ -11,7 +11,7 @@
                   Startup
                 </legend>
                 
-                <div id="error-div" class="alert alert-danger">
+                <div id="error-div" class="alert alert-danger {$ACTIVE$}">
                   {$STARTUP_ERROR$}
                 </div>
                 
@@ -23,7 +23,7 @@
                   <label for="email">
                     System admin E-mail address: <span class="required">*</span>
                   </label>
-                  <input class="form-control" type="text" id="email" name="email" placeholder="Email" />
+                  <input class="form-control" type="text" id="email" name="email" placeholder="Email" required />
                   <p class="error-mess">
                     Valid email is required
                   </p>
@@ -33,7 +33,7 @@
                   <label for="user">
                     System admin user name: <span class="required">*</span>
                   </label>
-                  <input class="form-control" type="text" id="user" name="user" placeholder="User" />
+                  <input class="form-control" type="text" id="user" name="user" placeholder="User" required />
                   <p class="error-mess">
                     User name is required
                   </p>
@@ -44,7 +44,7 @@
                     Password: <span class="required">*</span>
                   </label>
                   <p id="view-password" class="view-pass"><i class="fa fa-eye" aria-hidden="true"></i></p>
-                  <input class="form-control" type="password" id="password" name="password" placeholder="password" />
+                  <input class="form-control" type="password" id="password" name="password" placeholder="password" required />
                   <p class="error-mess">
                     Password is required, at least 1 letter, 1 number
                   </p>
@@ -58,7 +58,7 @@
                     Verify Password: <span class="required">*</span>
                   </label>
                   <p id="view-match" class="view-pass"><i class="fa fa-eye" aria-hidden="true"></i></p>
-                  <input class="form-control" type="password" id="verify" name="verify" placeholder="Verify password" />
+                  <input class="form-control" type="password" id="verify" name="verify" placeholder="Verify password" required />
                   <p class="error-mess">
                     Passwords don't match
                   </p>
