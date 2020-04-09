@@ -4,8 +4,7 @@ class Dbmodel {
     
   protected $sql;
   protected $rows = array();  
-  protected $conx;
-  protected $dblink;
+  protected $conx;  
   
   # Test if DBNAME exists
   public function test_db() {
@@ -32,20 +31,6 @@ class Dbmodel {
   # Close DB link
   protected function close_link() {
     $this->conx->close();
-  }
-  
-  # Create DB
-  protected function create_db($dbname) {    
-    $sql = "CREATE DATABASE {$dbname}
-            CHARACTER SET utf8
-            COLLATE utf8_unicode_ci";
-            
-    $this->dblink = new mysqli(DBHOST, DBUSER, DBPASS);
-    if (!$this->dblink->query($sql) == true) {
-      echo $this->dblink->error;
-    }
-        
-    $this->dblink->close();    
   }
   
   # Submit SQL query for INSERT, UPDATE or DELETE
