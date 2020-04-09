@@ -31,7 +31,7 @@ define ("LOCALES",
 
 # Required values
 
-define ("LOGIN_REQUIRED", 
+define ("SYS_REQUIRED", 
         array(
         "email",
         "user",        
