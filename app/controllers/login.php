@@ -8,7 +8,7 @@ class Login extends Controller {
     parent::__construct($controller, $method);
     
     session_start();
-    
+        
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Dbmodel");
     $this->load_model("Pagemodel");
@@ -44,23 +44,72 @@ class Login extends Controller {
         }
       };
       
-      $this->output->add_locale($err_key, $err_mess);
-      $this->build_page("login");
+      $this->output->add_locale($err_key, $err_mess);         
+      
+      if ($this->get_model("Startupmodel")->test_admin()) {
+        $this->build_page("login");
+      }      
     }    
   }
   
   # Start setup on application launch
-  private function startup() {
-    if(!$this->get_model("Dbmodel")->test_db()){
+  private function startup() {  
+    # If DB doesn't exist create it
+    if(!$this->get_model("Dbmodel")->test_db()) {
       $this->get_model("Startupmodel")->first_run();
       
-      if (file_exists(ROOT . DS . "config" . DS . "createtables.sql")) {
+      if (file_exists(ROOT . DS . "config" . DS . "createtables.sql")) {        
         $sql = file_get_contents(ROOT . DS . "config" . DS . "createtables.sql");
         $this->get_model("Startupmodel")->setup_tables($sql);
+        $this->get_model("Startupmodel")->startup_data();
       }
       else {
         $this->build_page("db-error");
       }
+    }
+    
+    # If system admin is not setup, ask to create it
+    if(!$this->get_model("Startupmodel")->test_admin()){
+            
+      # No errors state
+      $active_body = "STYLE";
+      $active_class = "";
+      
+      $this->output->add_locale($active_body, $active_class);
+      
+      $active_key = "ACTIVE";
+      $active_class = "";
+      
+      $this->output->add_locale($active_key, $active_class);
+      
+      $err_key = "STARTUP_ERROR";
+      $err_mess = "";
+      
+      $this->output->add_locale($err_key, $err_mess);
+      
+      # If errors are returned
+      if (isset($_SESSION["error"])){
+        $active_body = "STYLE";
+        $active_class = "style=\"height: auto;\"";
+        
+        $this->output->add_locale($active_body, $active_class);
+        
+        $active_key = "ACTIVE";
+        $active_class = "active";
+        
+        $this->output->add_locale($active_key, $active_class);
+              
+        $err_mess .= "Errors found!";
+        $err_mess .= "<br />\n";
+        
+        foreach ($_SESSION["error"] as $error) {
+          $err_mess .= $error . "<br />\n";          
+        }
+        unset($_SESSION["error"]);
+        $this->output->add_locale($err_key, $err_mess);
+      };
+      
+      $this->build_page("startup");
     }
   }
   
