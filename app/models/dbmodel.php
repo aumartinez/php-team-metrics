@@ -55,15 +55,22 @@ class Dbmodel {
   protected function get_query($sql) {
     $this->open_link();
     $result = $this->conx->query($sql);
+    
     if (!$result) {
       $_SESSION["error"][] = "Query error: " . $this->conx->error;
+      return false;
     }
-    while ($this->rows[] = $result->fetch_assoc());    
-    $result->free();
-    $this->close_link();
-    array_pop($this->rows);
-    
-    return $this->rows[0];
+    else if (count($result) > 1) {
+      while ($this->rows[] = $result->fetch_assoc());    
+      $result->free();
+      $this->close_link();
+      array_pop($this->rows);      
+      
+      return $this->rows[0];
+    }
+    else if (count($result) < 1) {
+      $_SESSION["error"][] = "Query error: Query returned no data.";
+    }
   }
   
 }
