@@ -69,7 +69,7 @@ class Login extends Controller {
     }
     
     # If system admin is not setup, ask to create it
-    if(!$this->get_model("Startupmodel")->test_admin()){
+    if(!$this->get_model("Startupmodel")->test_users()){
             
       # No errors state
       $active_body = "STYLE";
@@ -105,9 +105,10 @@ class Login extends Controller {
         foreach ($_SESSION["error"] as $error) {
           $err_mess .= $error . "<br />\n";          
         }
+        
         unset($_SESSION["error"]);
         $this->output->add_locale($err_key, $err_mess);
-      };
+      }
       
       $this->build_page("startup");
     }
