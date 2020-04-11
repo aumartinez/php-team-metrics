@@ -1,5 +1,5 @@
     <section class="body">
-      <div class="container bg-white form-wrapper">
+      <div class="container bg-white form-wrapper full-height">
         <div class="row">
           <div class="col-sm-4 col-center">            
             <form id="login-form" action="{$SITE_ROOT$}/auth/login" method="post">
@@ -11,7 +11,7 @@
                   Login
                 </legend>
                 
-                <div id="error-div">
+                <div id="error-div" class="alert alert-danger {$ACTIVE$}">
                   {$LOGIN_ERROR$}
                 </div>
                 
