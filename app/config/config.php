@@ -54,6 +54,7 @@ define ("EXCLUDED_PAGES",
           "login",
           "register",
           "success",
+          "pending",
           "db-error"
         ));
 ?>
