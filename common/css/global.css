@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body{
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -161,12 +165,7 @@ a.btn-primary:hover {
 
 /* Content */
 
-#startup section.body,
-#not-found section.body,
-#login section.body {
-  height: 100%;
-}
-
+section.body,
 .full-height,
 section.body .full-height .wrapper,
 section.body .form-wrapper {
