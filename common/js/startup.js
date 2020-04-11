@@ -79,8 +79,8 @@ $(document).ready(function(){
     var regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var testEmail = regExp.exec(email);
     
-    if (!testEmail) {       
-       console.log("error");
+    if (!testEmail || testEmail == null) {
+       err.push("email");
     }
     
     //Validate password length
@@ -93,7 +93,7 @@ $(document).ready(function(){
     var input = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
     var testPass = input.exec(password);
     
-    if (!testPass) {
+    if (!testPass || testPass == null) {
       err.push("password");
     }
     
