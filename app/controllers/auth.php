@@ -51,6 +51,8 @@ class Auth extends Controller {
     $this->get_model("Authmodel")->sanitize_post();
     $this->get_model("Authmodel")->sysadmin_validate();
     if ($this->get_model("Authmodel")->sysadmin_register()) {
+      unset($_SESSION["submit-form"]);
+      unset($_SESSION["error"]);
       $this->get_model("Authmodel")->redirect(PATH . "/success");
     }
     else {
