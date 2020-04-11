@@ -27,13 +27,29 @@ class Login extends Controller {
       header("Location:/". PATH ."/cpanel");
       exit();
     }
-    else {                  
+    else {
+      # No errors state
+      $active_body = "STYLE";
+      $active_class = "";
+      
+      $this->output->add_locale($active_body, $active_class);
+      
+      $active_key = "ACTIVE";
+      $active_class = "";
+      
+      $this->output->add_locale($active_key, $active_class);
+      
       # If errors are returned
       $err_key = "LOGIN_ERROR";
       $err_mess = "";
       
       if (isset($_SESSION["error"]) && isset($_SESSION["submit-form"])){
         unset($_SESSION["submit-form"]);
+        
+        $active_key = "ACTIVE";
+        $active_class = "active";
+        
+        $this->output->add_locale($active_key, $active_class);
         
         $err_mess = "\n";
         $err_mess .= "Errors found!";
@@ -44,9 +60,9 @@ class Login extends Controller {
         }
       };
       
-      $this->output->add_locale($err_key, $err_mess);         
+      $this->output->add_locale($err_key, $err_mess);
       
-      if ($this->get_model("Startupmodel")->test_admin()) {
+      if ($this->get_model("Startupmodel")->test_users()) {
         $this->build_page("login");
       }      
     }    
@@ -88,7 +104,7 @@ class Login extends Controller {
       $this->output->add_locale($err_key, $err_mess);
       
       # If errors are returned
-      if (isset($_SESSION["error"])){
+      if (isset($_SESSION["error"]) && count($_SESSION["error"]) > 0){
         $active_body = "STYLE";
         $active_class = "style=\"height: auto;\"";
         
@@ -112,6 +128,11 @@ class Login extends Controller {
       
       $this->build_page("startup");
     }
+  }
+  
+  # DB error page
+  public function dberror () {
+    $this->build_page("db-error");
   }
   
   # Not found handler
