@@ -29,8 +29,10 @@ define ("LOCALES",
           "MEDIA" => MEDIA
         ));
 
-# Required values
+# User default
+define ("DEFAULT_PIC", MEDIA . "/img/". "default-pic.png");
 
+# Required values
 define ("SYS_REQUIRED", 
         array(
         "email",
@@ -51,6 +53,7 @@ define ("EXCLUDED_PAGES",
           "startup",
           "login",
           "register",
+          "success",
           "db-error"
         ));
 ?>
