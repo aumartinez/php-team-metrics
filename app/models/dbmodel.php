@@ -66,7 +66,7 @@ class Dbmodel {
       $this->close_link();
       array_pop($this->rows);
       
-      return $this->rows[0];      
+      return $this->rows;
     }
     else if (count($result) < 1) {
       $_SESSION["error"][] = "Query error: Query returned no data.";
