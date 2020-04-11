@@ -1,15 +1,87 @@
 <?php
 
 class Startupmodel extends Dbmodel {
+  protected $dblink;
     
   # First run setup
   public function first_run() {
     $dbname = DBNAME;    
-    $this->create_db($dbname);    
+    $this->create_db($dbname);
   }
   
+  # Prepare DB tables
   public function setup_tables($sql) {
     $this->set_multyquery($sql);
+  }
+  
+  public function test_users() {
+    $sql = "SELECT *
+            FROM users";
+    
+    if (!$this->get_query($sql)) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+  
+  # Insert default data
+  public function startup_data() {    
+    # Create sysadmin account
+    $sql = "INSERT INTO accounts (
+            account_name
+            ) 
+            VALUES (
+            'System admin'
+            )";
+    
+    $this->set_query($sql);
+    
+    # Insert default position names
+    $sql = "INSERT INTO positions (
+            position_name, 
+            user_access
+            ) 
+            VALUES (
+            'System admin', 1
+            ), (
+            'Operations Manager', 2
+            ), (
+            'Team Leader', 3
+            ), (
+            'Agent', 4
+            )";
+            
+   $this->set_query($sql);
+   
+    # Insert default position names
+    $sql = "INSERT INTO teams (
+            team_id,
+            team_name,
+            account_name
+            ) 
+            VALUES (
+            'team-000',
+            'System admins',
+            'System admin'
+            )";
+    
+    $this->set_query($sql);
+  }
+  
+  # Create DB
+  protected function create_db($dbname) {    
+    $sql = "CREATE DATABASE {$dbname}
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci";
+    
+    $this->dblink = new mysqli(DBHOST, DBUSER, DBPASS);
+    if (!$this->dblink->query($sql) == true) {
+      echo $this->dblink->error;
+    }
+    
+    $this->dblink->close();    
   }
   
 }
