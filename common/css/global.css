@@ -9,16 +9,11 @@
   box-sizing: border-box;
 }
 
-html {
-  height: 100%;
-}
-
 body{
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  background-color: #e7e7e7;
-  height: 100%;
+  background-color: #e7e7e7;  
 }
 
 header,
@@ -45,6 +40,10 @@ div[class*="col-"].col-center {
 
 .long-btn {
   width: 100%;
+}
+
+.full-height {
+  min-height: 100vh;
 }
 
 /* Titles */
@@ -165,12 +164,7 @@ a.btn-primary:hover {
 
 /* Content */
 
-section.body,
-.full-height,
-section.body .full-height .wrapper,
-section.body .form-wrapper {
-  height: 100%;
-}
+
 
 /* Forms */
 
