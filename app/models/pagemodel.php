@@ -1,6 +1,6 @@
 <?php
 
-class Pagemodel extends Dbmodel {
+class PageModel extends DbModel {
   
   private $html_str;
   
