@@ -64,6 +64,25 @@ CREATE TABLE IF NOT EXISTS users (
   UNIQUE (user_name)
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci AUTO_INCREMENT = 1;
 
+CREATE TABLE IF NOT EXISTS pending (
+  id INT NOT NULL AUTO_INCREMENT,
+  create_date DATETIME NOT NULL,  
+  user_name VARCHAR(50) NOT NULL,
+  user_firstname VARCHAR(100) NOT NULL,
+  user_lastname VARCHAR(100) NOT NULL,
+  employee_id CHAR(4) NOT NULL,
+  team_id VARCHAR(50) NOT NULL,
+  position_name VARCHAR(50) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  salt VARCHAR(100) NOT NULL,
+  user_pic VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  account_name VARCHAR(50) NOT NULL,
+  user_access CHAR(1) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE (user_name)
+) ENGINE = MyISAM DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci AUTO_INCREMENT = 1;
+
 CREATE TABLE IF NOT EXISTS resetpassword (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,  
   user_name INT NOT NULL,
