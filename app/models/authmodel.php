@@ -1,6 +1,6 @@
 <?php
 
-class Authmodel extends Dbmodel {
+class AuthModel extends DbModel {
   public $sanitized = array();  
   
   # Required fields auth
