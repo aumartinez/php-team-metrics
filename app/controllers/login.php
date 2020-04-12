@@ -15,7 +15,7 @@ class Login extends Controller {
     $this->load_model("StartupModel");
     
     # Instantiate custom view output
-    $this->output = new Pageview();
+    $this->output = new PageView();
     
     # Start methods
     $this->startup(); 
