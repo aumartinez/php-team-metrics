@@ -23,7 +23,7 @@
                   <label for="email">
                     System admin E-mail address: <span class="required">*</span>
                   </label>
-                  <input class="form-control" type="email" id="email" name="email" placeholder="Email" required />
+                  <input class="form-control" type="email" id="email" name="email" placeholder="Email" required autocomplete="email" />
                   <p class="error-mess">
                     Valid email is required
                   </p>
@@ -33,7 +33,7 @@
                   <label for="user">
                     System admin user name: <span class="required">*</span>
                   </label>
-                  <input class="form-control" type="text" id="user" name="user" placeholder="User" required />
+                  <input class="form-control" type="text" id="user" name="user" placeholder="User" required autocomplete="username" />
                   <p class="error-mess">
                     User name is required
                   </p>
@@ -44,7 +44,7 @@
                     Password: <span class="required">*</span>
                   </label>
                   <p id="view-password" class="view-pass"><i class="fa fa-eye" aria-hidden="true"></i></p>
-                  <input class="form-control" type="password" id="password" name="password" placeholder="password" required />
+                  <input class="form-control" type="password" id="password" name="password" placeholder="password" required autocomplete="new-password" />
                   <p class="error-mess">
                     Password is required, at least 1 letter, 1 number
                   </p>
@@ -58,7 +58,7 @@
                     Verify Password: <span class="required">*</span>
                   </label>
                   <p id="view-match" class="view-pass"><i class="fa fa-eye" aria-hidden="true"></i></p>
-                  <input class="form-control" type="password" id="verify" name="verify" placeholder="Verify password" required />
+                  <input class="form-control" type="password" id="verify" name="verify" placeholder="Verify password" required autocomplete="new-password" />
                   <p class="error-mess">
                     Passwords don't match
                   </p>
