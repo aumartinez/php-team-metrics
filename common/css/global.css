@@ -195,6 +195,20 @@ a.btn-primary:hover {
   margin: 0;
 }
 
+#user-check {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  font-size: 22px;
+  border: none;
+  background-color: transparent;
+  color: green;
+  z-index: 1;
+  cursor: pointer;
+  margin: 0;
+}
+
+
 .login-logo {
   max-height: 120px;
 }
