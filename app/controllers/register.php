@@ -15,7 +15,7 @@ class Register extends Controller {
     $this->load_model("PageModel");
     
     # Instantiate custom view output
-    $this->output = new Pageview();
+    $this->output = new PageView();
   }
   
   # Each method will request the model to present the local resource
