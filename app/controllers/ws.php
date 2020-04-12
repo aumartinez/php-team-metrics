@@ -11,6 +11,7 @@ class Ws extends Controller {
             
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Dbmodel");
+    $this->load_model("Wsmodel");
     $this->load_model("Pagemodel");
     
     # Instantiate custom view output
@@ -24,9 +25,24 @@ class Ws extends Controller {
     echo json_encode($mess, JSON_FORCE_OBJECT);
   }
   
+  public function accounts() {
+    $table = "accounts";
+    $arr = array();
+    $arr = $this->get_model("Wsmodel")->get_data($table);    
+    echo json_encode($arr, JSON_FORCE_OBJECT);
+  }
+  
+  public function positions() {
+    $table = "positions";
+    $arr = array();
+    $arr = $this->get_model("Wsmodel")->get_data($table);    
+    echo json_encode($arr, JSON_FORCE_OBJECT);
+  }
+  
   # Not found handler
   public function not_found() {
     # 404 page
+    header("Content-Type: text/html; charset=UTF-8");
     $this->build_page("not-found");
   }
   
