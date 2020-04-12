@@ -20,7 +20,7 @@ class Dbmodel {
   protected function open_link() {  
     $this->conx = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
     if ($this->conx->connect_errno) {
-      $_SESSION["error"][] = "Failed to connect to MySQL: " . $this->conx->connect_error;      
+      $_SESSION["error"][] = "Failed to connect to MySQL: " . $this->conx->connect_error;
       exit();
     }
     
@@ -54,25 +54,18 @@ class Dbmodel {
   # Submit SELECT SQL query
   protected function get_query($sql) {
     $this->open_link();
-    $result = $this->conx->query($sql); 
-    
-    //print_r($result);
+    $result = $this->conx->query($sql);     
     
     if (!$result) {
       $_SESSION["error"][] = "Query error: " . $this->conx->error;
       return false;
     }
-    else if ($result->num_rows > 0) {
-      while ($this->rows[] = $result->fetch_assoc());    
-      $result->free();
-      $this->close_link();
-      array_pop($this->rows);
-      return $this->rows[0];
-    }
-    else {
-      $_SESSION["error"][] = "No data found";
-      return false;
-    }
+    
+    while ($this->rows[] = $result->fetch_assoc());    
+    $result->free();
+    $this->close_link();
+    array_pop($this->rows);    
+    return $this->rows;
   }
   
 }
