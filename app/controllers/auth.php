@@ -14,7 +14,11 @@ class Auth extends Controller {
     $_SESSION["error"] = array();
     
     # Any models required to interact with this controller should be loaded here    
-    $this->load_model("Authmodel");  
+    $this->load_model("AuthModel");  
+  }
+  
+  public function index() {
+    $this->get_model("AuthModel")->redirect(PATH . "/login");
   }
   
   public function login() {    
@@ -27,13 +31,13 @@ class Auth extends Controller {
     $_SESSION["error"] = array();
     
     # Initialize methods
-    $this->get_model("Authmodel")->login_required();
-    $this->get_model("Authmodel")->sanitize_post();
-    if ($this->get_model("Authmodel")->auth_user()) {
-      $this->get_model("Authmodel")->redirect(PATH . "/cpanel");
+    $this->get_model("AuthModel")->login_required();
+    $this->get_model("AuthModel")->sanitize_post();
+    if ($this->get_model("AuthModel")->auth_user()) {
+      $this->get_model("AuthModel")->redirect(PATH . "/cpanel");
     }
     else {
-      $this->get_model("Authmodel")->redirect(PATH . "/login");
+      $this->get_model("AuthModel")->redirect(PATH . "/login");
     }
   }
   
@@ -47,22 +51,22 @@ class Auth extends Controller {
     $_SESSION["error"] = array();
     
     # Initialize methods
-    $this->get_model("Authmodel")->sysadmin_required();
-    $this->get_model("Authmodel")->sanitize_post();
-    $this->get_model("Authmodel")->sysadmin_validate();
-    if ($this->get_model("Authmodel")->sysadmin_register()) {
+    $this->get_model("AuthModel")->sysadmin_required();
+    $this->get_model("AuthModel")->sanitize_post();
+    $this->get_model("AuthModel")->sysadmin_validate();
+    if ($this->get_model("AuthModel")->sysadmin_register()) {
       unset($_SESSION["submit-form"]);
       unset($_SESSION["error"]);
-      $this->get_model("Authmodel")->redirect(PATH . "/success");
+      $this->get_model("AuthModel")->redirect(PATH . "/success");
     }
     else {
-      $this->get_model("Authmodel")->redirect(PATH . "/dberror");
+      $this->get_model("AuthModel")->redirect(PATH . "/dberror");
     }
     
   } 
    
   public function not_found() {
-    $this->get_model("Authmodel")->redirect(PATH . "/login");
+    $this->get_model("AuthModel")->redirect(PATH . "/login");
   }
   
 }
