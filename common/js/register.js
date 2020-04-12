@@ -55,22 +55,50 @@ $(document).ready(function(){
   });
   
   function validateForm() {    
-    var arr = [];
+    var err = [];
         
     //Required fields    
     if ($("#first-name").val().length == 0) {
-      arr.push("first-name");
+      err.push("first-name");
+    }
+    
+    if ($("#last-name").val().length == 0) {
+      err.push("last-name");
+    }
+    
+    if ($("#email").val().length == 0) {
+      err.push("email");
     }
     
     if ($("#user").val().length == 0) {
-      arr.push("user");
+      err.push("user");
+    }
+    
+    if ($("#employee-id").val().length == 0) {
+      err.push("employee-id");
     }
     
     if ($("#password").val().length == 0) {
-      arr.push("password");
+      err.push("password");
     }
     
-    return arr;
+    if ($("#verify").val().length == 0) {
+      err.push("verify");
+    }
+    
+    if ($("#verify").val().length == 0) {
+      err.push("verify");
+    }
+    
+    if ($("#account").val().length == 0) {
+      err.push("account");
+    }
+    
+    if ($("#position").val().length == 0) {
+      err.push("position");
+    }
+    
+    return err;
   }
   
   function displayErrors(errors) {
