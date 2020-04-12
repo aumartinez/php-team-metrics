@@ -1,6 +1,6 @@
 <?php
 
-class Success extends Controller {
+class Ws extends Controller {
   
   protected $output;  
     
