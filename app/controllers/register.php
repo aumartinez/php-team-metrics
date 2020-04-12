@@ -25,13 +25,18 @@ class Register extends Controller {
     }
     else {
       # If referred from Login page, clear session variables
-      $url = $_SERVER["HTTP_REFERER"];
-      $url_array = explode("/", trim($url, "/"));
-      
-      $referrer = array_pop($url_array);
-      
-      if ($referrer == "login") {
-        session_unset();
+      if (isset($_SERVER["HTTP_REFERER"])) {
+        $url = $_SERVER["HTTP_REFERER"];
+        $url_array = explode("/", trim($url, "/"));
+        
+        $referrer = array_pop($url_array);
+        
+        if ($referrer == "login") {
+          session_unset();
+        }
+      }
+      else {
+        header("Location:/". PATH ."/cpanel");
       }
     
       # If errors are returned
