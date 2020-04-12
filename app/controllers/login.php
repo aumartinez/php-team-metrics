@@ -28,12 +28,7 @@ class Login extends Controller {
       exit();
     }
     else {
-      # No errors state
-      $active_body = "STYLE";
-      $active_class = "";
-      
-      $this->output->add_locale($active_body, $active_class);
-      
+      # No errors state      
       $active_key = "ACTIVE";
       $active_class = "";
       
@@ -83,16 +78,11 @@ class Login extends Controller {
         $this->build_page("db-error");
       }
     }
-    
+        
     # If system admin is not setup, ask to create it
     if(!$this->get_model("Startupmodel")->test_users()){
             
-      # No errors state
-      $active_body = "STYLE";
-      $active_class = "";
-      
-      $this->output->add_locale($active_body, $active_class);
-      
+      # No errors state      
       $active_key = "ACTIVE";
       $active_class = "";
       
@@ -104,12 +94,7 @@ class Login extends Controller {
       $this->output->add_locale($err_key, $err_mess);
       
       # If errors are returned
-      if (isset($_SESSION["error"]) && count($_SESSION["error"]) > 0){
-        $active_body = "STYLE";
-        $active_class = "style=\"height: auto;\"";
-        
-        $this->output->add_locale($active_body, $active_class);
-        
+      if (isset($_SESSION["error"])){      
         $active_key = "ACTIVE";
         $active_class = "active";
         
