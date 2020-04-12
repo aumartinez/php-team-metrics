@@ -60,7 +60,7 @@ class Dbmodel {
       $_SESSION["error"][] = "Query error: " . $this->conx->error;
       return false;
     }
-    else if (count($result) > 1) {
+    else if (count($result) >= 1) {
       while ($this->rows[] = $result->fetch_assoc());    
       $result->free();
       $this->close_link();
@@ -68,8 +68,9 @@ class Dbmodel {
       
       return $this->rows[0];
     }
-    else if (count($result) < 1) {
+    else if (count($result) == 0) {
       $_SESSION["error"][] = "Query error: Query returned no data.";
+      return false;
     }
   }
   
