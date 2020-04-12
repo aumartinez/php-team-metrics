@@ -57,12 +57,12 @@ class Authmodel extends Dbmodel {
     
     $result = $this->get_query($sql);
     
-    $salt = $result["salt"];
+    $salt = $result[0]["salt"];    
     $crypted = crypt($password, $salt);
     $crypted = substr($crypted, strlen($salt));    
             
     if ($user && $password) {      
-      if ($crypted == $result["password"]) {        
+      if ($crypted == $result[0]["password"]) {        
         $_SESSION["logged"] = true;
         
         return true;
