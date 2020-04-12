@@ -17,13 +17,17 @@ class Startupmodel extends Dbmodel {
   public function test_users() {
     $sql = "SELECT *
             FROM users";
+            
+    $result = array();
+    $result = $this->get_query($sql);
     
-    if (!$this->get_query($sql)) {
-      return false;
-    }
-    else {
+    if (count($result) > 0){
       return true;
     }
+    else {
+      return false;
+    }
+    
   }
   
   # Insert default data
