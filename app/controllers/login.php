@@ -128,8 +128,7 @@ class Login extends Controller {
     # Clear session
     session_unset();
     session_destroy();
-    session_write_close();
-    session_regenerate_id();
+    session_write_close();    
     setcookie(session_name(), "", 0, "/");    
   }
   
