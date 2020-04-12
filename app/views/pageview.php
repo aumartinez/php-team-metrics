@@ -1,6 +1,6 @@
 <?php
 
-class Pageview extends View {
+class PageView extends View {
   private $locales = array();
   
   # Initialize keywords dictionary
