@@ -1,6 +1,6 @@
 <?php
 
-class Dbmodel {
+class DbModel {
 
   protected $rows = array();  
   protected $conx;  
