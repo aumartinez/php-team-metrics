@@ -1,6 +1,6 @@
 <?php
 
-class Cpanel extends Controller {
+class CPanel extends Controller {
   
   protected $output;  
     
@@ -11,11 +11,11 @@ class Cpanel extends Controller {
     session_regenerate_id();
     
     # Any models required to interact with this controller should be loaded here    
-    $this->load_model("Dbmodel");    
-    $this->load_model("Pagemodel");
+    $this->load_model("DBModel");    
+    $this->load_model("PageModel");
     
     # Instantiate custom view output
-    $this->output = new Pageview();
+    $this->output = new PageView();
   }
   
   # Each method will request the model to present the local resource
@@ -37,7 +37,7 @@ class Cpanel extends Controller {
   
   # Controller/Model/View link
   protected function build_page($page_name) {    
-    $html_src = $this->get_model("Pagemodel")->get_page($page_name);    
+    $html_src = $this->get_model("PageModel")->get_page($page_name);    
     $html = $this->output->replace_localizations($html_src);
     
     $this->get_view()->render($html);
