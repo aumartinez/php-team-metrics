@@ -7,7 +7,7 @@ class Success extends Controller {
   public function __construct($controller, $method) {
     parent::__construct($controller, $method);
     
-    session_start();
+    header("Content-Type: application/json");
             
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("Dbmodel");
@@ -19,7 +19,9 @@ class Success extends Controller {
   
   # Each method will request the model to present the local resource
   public function index() {
-    echo "index";
+    $mess = array();
+    $mess["Index"] = "Web services index";
+    echo json_encode($mess, JSON_FORCE_OBJECT);
   }
   
   # Not found handler
