@@ -39,12 +39,23 @@ class Register extends Controller {
         header("Location:/". PATH ."/cpanel");
       }
     
-      # If errors are returned
+      # Initial states
+      $active_key = "ACTIVE";
+      $active_class = "";
+      
+      $this->output->add_locale($active_key, $active_class);
+      
       $err_key = "REGISTER_ERROR";
       $err_mess = "";
       
+      # If errors are returned
       if (isset($_SESSION["error"]) && isset($_SESSION["submit-form"])){
         unset($_SESSION["submit-form"]);
+        
+        $active_key = "ACTIVE";
+        $active_class = "active";
+        
+        $this->output->add_locale($active_key, $active_class);
         
         $err_mess = "\n";
         $err_mess .= "Errors found!";
