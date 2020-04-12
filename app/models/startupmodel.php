@@ -1,6 +1,6 @@
 <?php
 
-class Startupmodel extends Dbmodel {
+class StartupModel extends DbModel {
   protected $dblink;
     
   # First run setup
