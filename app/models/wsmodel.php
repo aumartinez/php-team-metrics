@@ -1,6 +1,6 @@
 <?php
 
-class Wsmodel extends Dbmodel {
+class WSModel extends DbModel {
     
     public function get_data($table) {
       $sql = "SELECT * FROM {$table}";
