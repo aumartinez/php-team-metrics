@@ -10,9 +10,9 @@ class Login extends Controller {
     session_start();
         
     # Any models required to interact with this controller should be loaded here    
-    $this->load_model("Dbmodel");
-    $this->load_model("Pagemodel");
-    $this->load_model("Startupmodel");
+    $this->load_model("DbModel");
+    $this->load_model("PageModel");
+    $this->load_model("StartupModel");
     
     # Instantiate custom view output
     $this->output = new Pageview();
@@ -57,7 +57,7 @@ class Login extends Controller {
       
       $this->output->add_locale($err_key, $err_mess);
       
-      if ($this->get_model("Startupmodel")->test_users()) {
+      if ($this->get_model("StartupModel")->test_users()) {
         $this->build_page("login");
       }      
     }    
@@ -66,13 +66,13 @@ class Login extends Controller {
   # Start setup on application launch
   private function startup() {  
     # If DB doesn't exist create it
-    if(!$this->get_model("Dbmodel")->test_db()) {
-      $this->get_model("Startupmodel")->first_run();
+    if(!$this->get_model("DbModel")->test_db()) {
+      $this->get_model("StartupModel")->first_run();
       
       if (file_exists(ROOT . DS . "config" . DS . "createtables.sql")) {        
         $sql = file_get_contents(ROOT . DS . "config" . DS . "createtables.sql");
-        $this->get_model("Startupmodel")->setup_tables($sql);
-        $this->get_model("Startupmodel")->startup_data();
+        $this->get_model("StartupModel")->setup_tables($sql);
+        $this->get_model("StartupModel")->startup_data();
       }
       else {
         $this->build_page("db-error");
@@ -80,7 +80,7 @@ class Login extends Controller {
     }
         
     # If system admin is not setup, ask to create it
-    if(!$this->get_model("Startupmodel")->test_users()){
+    if(!$this->get_model("StartupModel")->test_users()){
             
       # No errors state      
       $active_key = "ACTIVE";
@@ -134,7 +134,7 @@ class Login extends Controller {
   
   # Controller/Model/View link
   protected function build_page($page_name) {    
-    $html_src = $this->get_model("Pagemodel")->get_page($page_name);    
+    $html_src = $this->get_model("PageModel")->get_page($page_name);    
     $html = $this->output->replace_localizations($html_src);
     
     $this->get_view()->render($html);
