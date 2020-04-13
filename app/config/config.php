@@ -45,6 +45,19 @@ define ("LOGIN_REQUIRED",
           "user",
           "password"
         ));
+        
+define ("REGISTER_REQUIRED", 
+        array(
+        "first-name",
+        "last-name",
+        "email",
+        "user",
+        "employee-id",
+        "password",
+        "verify",
+        "account",
+        "position"
+        ));
 
 # Excluded pages
 define ("EXCLUDED_PAGES",
