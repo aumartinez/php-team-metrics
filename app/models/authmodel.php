@@ -14,7 +14,7 @@ class AuthModel extends DbModel {
       }
     }
     
-    $this->error_check();
+    $this->error_check("login");
   }
   
   public function sysadmin_required() {
@@ -27,10 +27,23 @@ class AuthModel extends DbModel {
       }
     }
     
-    $this->error_check();
+    $this->error_check("login");
   }
   
-  # Global sanitize method
+  public function register_required() {
+    $required = REGISTER_REQUIRED;
+    
+    # Check required fields
+    foreach ($required as $value) {
+      if (!isset($_POST[$value]) || $_POST[$value] == "") {
+        $_SESSION["error"][] = $value . " is required";
+      }
+    }
+    
+    $this->error_check("register");
+  }
+  
+  # Global sanitize methods
   public function sanitize_post() {
     $this->sanitized = array();      
     
@@ -43,7 +56,21 @@ class AuthModel extends DbModel {
     }
     
     return $this->sanitized;
-  }  
+  }
+  
+  public function sanitize_get() {
+    $this->sanitized = array();      
+    
+    foreach ($_GET as $key => $value) {
+      $value = trim($value);
+      $value = stripslashes($value);
+      $value = htmlspecialchars($value);
+      
+      $this->sanitized[$key] = $this->open_link()->real_escape_string($value);
+    }
+    
+    return $this->sanitized;
+  }
   
   # Auth user
   public function auth_user() {
@@ -52,7 +79,8 @@ class AuthModel extends DbModel {
     $user = $this->sanitized["user"];
     $password = $this->sanitized["password"];
     
-    $sql = "SELECT * FROM users
+    $sql = "SELECT * 
+            FROM users
             WHERE user_name = '{$user}' OR email = '{$user}'";
     
     $result = $this->get_query($sql);
@@ -75,42 +103,94 @@ class AuthModel extends DbModel {
       $_SESSION["error"][] = "Couldn't authenticate user";
     }
     
-    $this->error_check();
+    $this->error_check("login");
   }
   
   # Additional validations
-  public function sysadmin_validate() {  
+  public function sysadmin_validate() { 
+    # Email is valid
     if (isset($_POST["email"]) && $_POST["email"] != "") {
       if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-        $_SESSION["error"][] = "Email is invalid.";
+        $_SESSION["error"][] = "Email is invalid";
       }
     }
     
+    # Password is valid and is verified
     $test = $_POST["password"];
     $patt = "/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/";
     
     if (isset($_POST["password"]) && $_POST["password"] != "") {
       if (isset($_POST["verify"]) && $_POST["verify"] != ""){
         if ($_POST["password"] != $_POST["verify"]) {
-          $_SESSION["error"][] = "Passwords don't match.";
+          $_SESSION["error"][] = "Passwords don't match";
         }
         else if (strlen($_POST["password"]) < 6 || strlen($_POST["verify"]) < 6) {
-          $_SESSION["error"][] = "Passwords should be at least 6 characters.";
+          $_SESSION["error"][] = "Passwords should be at least 6 characters";
         }
         else if (!preg_match($patt, $test)) {
-          $_SESSION["error"][] = "Password should contain 1 letter and 1 number.";
+          $_SESSION["error"][] = "Password should contain 1 letter and 1 number";
         }
       }
     }
     
-    $this->error_check();
+    $this->error_check("login");
+  }
+  
+  public function register_validate() {
+    # Email is valid
+    if (isset($_POST["email"]) && $_POST["email"] != "") {
+      if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+        $_SESSION["error"][] = "Email is invalid";
+      }
+    }   
+    
+    # Check if user name is not taken
+    $this->sanitize_post();
+    $user = $this->sanitized["user"];
+    
+    $sql = "SELECT * 
+            FROM users
+            WHERE user_name = '{$user}'";    
+    
+    $result = $this->get_query($sql);
+    
+    if ($user == $result[0]["user_name"]) {
+      $_SESSION["error"][] = "User name already in use";
+    }
+    
+    # Check if Employee ID is four digits
+    if (isset($_POST["employee-id"]) && $_POST["employee-id"] != "") {
+      if (strlen($_POST["employee-id"]) != 4) {
+        $_SESSION["error"][] = "Invalid Employee ID";
+      }
+    }
+    
+    # Password is valid and is verified
+    $test = $_POST["password"];
+    $patt = "/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/";
+    
+    if (isset($_POST["password"]) && $_POST["password"] != "") {
+      if (isset($_POST["verify"]) && $_POST["verify"] != ""){
+        if ($_POST["password"] != $_POST["verify"]) {
+          $_SESSION["error"][] = "Passwords don't match";
+        }
+        else if (strlen($_POST["password"]) < 6 || strlen($_POST["verify"]) < 6) {
+          $_SESSION["error"][] = "Passwords should be at least 6 characters";
+        }
+        else if (!preg_match($patt, $test)) {
+          $_SESSION["error"][] = "Password should contain 1 letter and 1 number";
+        }
+      }
+    }
+    
+    $this->error_check("register");
   }
   
   # Error check method
-  protected function error_check() {
+  protected function error_check($page) {
     if (count($_SESSION["error"]) > 0) {
       error_log("Error validating form", 0);
-      $this->redirect(PATH . "/login");
+      $this->redirect(PATH . "/" . $page);
     }
   }
   
