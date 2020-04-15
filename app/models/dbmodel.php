@@ -68,6 +68,20 @@ class DbModel {
     return $this->rows;
   }
   
+  # Submit SELECT SQL query - get row count if matches found
+  protected function get_rows($sql) {
+    $this->open_link();
+    $result = $this->conx->query($sql);
+    
+    if (!$result) {
+      $_SESSION["error"][] = "Query error: " . $this->conx->error;
+      return false;
+    }
+    
+    $rows = $result->num_rows;    
+    return $rows;    
+  }
+  
 }
 
 ?>
