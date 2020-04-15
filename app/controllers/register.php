@@ -20,9 +20,7 @@ class Register extends Controller {
   
   # Each method will request the model to present the local resource
   public function index() {
-  
-  
-    
+
     if (isset($_SESSION["logged"])) {      
       header("Location:/". PATH ."/cpanel");      
     }
@@ -67,9 +65,12 @@ class Register extends Controller {
         foreach ($_SESSION["error"] as $error) {
           $err_mess .= $error . "<br />\n";
         }
+        
+        unset($_SESSION["error"]);
       };
       
       $this->output->add_locale($err_key, $err_mess);
+      $this->get_model("PageModel")->page_title = "Registration";
       $this->build_page("register");
     }    
   }
