@@ -33,14 +33,14 @@ class Login extends Controller {
       $active_class = "";
       
       $this->output->add_locale($active_key, $active_class);
-      
-      # If errors are returned
+            
       $err_key = "LOGIN_ERROR";
       $err_mess = "";
       
       if (isset($_SESSION["error"]) && isset($_SESSION["submit-form"])){
         unset($_SESSION["submit-form"]);
         
+        # If errors are returned        
         $active_key = "ACTIVE";
         $active_class = "active";
         
@@ -58,6 +58,7 @@ class Login extends Controller {
       $this->output->add_locale($err_key, $err_mess);
       
       if ($this->get_model("StartupModel")->test_users()) {
+        $this->get_model("PageModel")->site_title = "Login";
         $this->build_page("login");
       }      
     }    
@@ -111,6 +112,7 @@ class Login extends Controller {
         $this->output->add_locale($err_key, $err_mess);
       }
       
+      $this->get_model("PageModel")->site_title = "Start up";
       $this->build_page("startup");
     }
   }
@@ -129,7 +131,7 @@ class Login extends Controller {
     session_unset();
     session_destroy();
     session_write_close();    
-    setcookie(session_name(), "", 0, "/");    
+    setcookie(session_name(), "", 0, "/");
   }
   
   # Controller/Model/View link
