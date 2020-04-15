@@ -20,6 +20,17 @@ class Recover extends Controller {
   
   # Each method will request the model to present the local resource
   public function index() {
+    # No errors state      
+    $active_key = "ACTIVE";
+    $active_class = "";
+    
+    $this->output->add_locale($active_key, $active_class);
+    
+    $err_key = "RECOVERY_ERROR";
+    $err_mess = "";
+    
+    $this->output->add_locale($err_key, $err_mess);
+    
     $this->get_model("PageModel")->site_title = "Recovery";
     $this->build_page("recover");
   }
