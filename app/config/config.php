@@ -66,6 +66,7 @@ define ("EXCLUDED_PAGES",
           "startup",
           "login",
           "register",
+          "recover",
           "success",
           "pending",
           "db-error"
