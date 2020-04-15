@@ -1,4 +1,4 @@
-// Login validate
+//Startup validate
 
 $(document).ready(function(){
   //To do
