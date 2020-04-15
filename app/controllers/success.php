@@ -34,8 +34,8 @@ class Success extends Controller {
     $this->build_page("pending");
   }
   
-  public function recovery() {
-    $this->get_model("PageModel")->page_title = "Recovery";
+  public function recover() {
+    $this->get_model("PageModel")->page_title = "Password recovery";
     $this->build_page("emailrecover");
   }
   
