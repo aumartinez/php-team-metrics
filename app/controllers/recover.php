@@ -31,7 +31,7 @@ class Recover extends Controller {
     
     $this->output->add_locale($err_key, $err_mess);
     
-    $this->get_model("PageModel")->site_title = "Recovery";
+    $this->get_model("PageModel")->page_title = "Recovery";
     $this->build_page("recover");
   }
   
