@@ -1,0 +1,46 @@
+    <section class="body">
+      <div class="container bg-white form-wrapper full-height">
+        <div class="row">
+          <div class="col-sm-4 col-center">            
+            <form id="login-form" action="{$SITE_ROOT$}/auth/login" method="post">
+              <p class="text-center">
+                <img class="img-responsive img-center login-logo" src="{$MEDIA$}/img/logo.png" alt="Company logo" />
+              </p>
+              <fieldset>                
+                <legend>
+                  Password Recovery
+                </legend>
+                
+                <div id="error-div" class="alert alert-danger {$ACTIVE$}">
+                  {$RECOVERY_ERROR$}
+                </div>
+                
+                <div class="form-group">
+                  <p class="required">required <span class="required">*</span></p>
+                </div>
+                
+                <div class="form-group">
+                  <label for="email">
+                    E-mail address: <span class="required">*</span>
+                  </label>
+                  <input class="form-control" type="email" id="email" name="email" placeholder="email" autocomplete="email" />
+                  <p class="error-mess">
+                    Email address is required
+                  </p>
+                </div>
+                
+                <div class="form-group">
+                  <button class="btn btn-primary long-btn" type="submit" id="submit-form" name="submit-form">
+                    Login
+                  </button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <div class="loader">
+      <img src="{$MEDIA$}/img/loader.gif" alt="loader" />
+    </div>
