@@ -58,7 +58,7 @@ class Login extends Controller {
       $this->output->add_locale($err_key, $err_mess);
       
       if ($this->get_model("StartupModel")->test_users()) {
-        $this->get_model("PageModel")->site_title = "Login";
+        $this->get_model("PageModel")->page_title = "Login";
         $this->build_page("login");
       }      
     }    
@@ -112,7 +112,7 @@ class Login extends Controller {
         $this->output->add_locale($err_key, $err_mess);
       }
       
-      $this->get_model("PageModel")->site_title = "Start up";
+      $this->get_model("PageModel")->page_title = "Start up";
       $this->build_page("startup");
     }
   }
