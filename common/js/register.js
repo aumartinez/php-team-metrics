@@ -1,7 +1,39 @@
-// Login validate
+//Register validate
 
 $(document).ready(function(){
   //To do
+  
+  fillSelect("account", "account_name");
+  fillSelect("position", "position_name");
+  
+  function fillSelect(key, field) {
+    var url = $("#register-form").attr("action");
+    var arr = url.split("/");
+    while (arr[arr.length - 1] != "auth"){
+      arr.pop();
+    }
+    arr.pop();
+    arr.push("ws");
+    arr.push(key + "s");
+    arr.push("");
+    
+    url = arr.join("/");
+    
+    $.getJSON(url, function(result){
+      var count = 0;
+      while (result[count]) {
+        count++;
+      }
+      
+      for (var i = 0; i < count; i++) {      
+        var item = document.createElement("option");
+        $(item).val(result[i][field]);
+        $(item).text(result[i][field]);        
+        $("#" + key + ">option:last-child").after(item);
+      }
+      
+    });
+  }
     
   $("#register-form").submit(function(evt){    
     $(".loader").addClass("active");
@@ -98,6 +130,39 @@ $(document).ready(function(){
       err.push("position");
     }
     
+    //Validate email
+    var email = $("#email").val();
+    var regExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var testEmail = regExp.exec(email);
+
+    if (!testEmail || testEmail == null) {
+       err.push("email");
+    }
+    
+    //Validate password length
+    if($("#password").val().length < 6) {
+      err.push("password");
+    }
+    
+    //Valid employee id
+    if ($("#employee-id").val().length !== 4) {
+      err.push("employee-id");
+    }
+    
+    //Validate password complexity (1 letter, 1 number)
+    var password = $("#password").val();
+    var input = /^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/;
+    var testPass = input.exec(password);
+    
+    if (!testPass || testPass == null) {
+      err.push("password");
+    }
+
+    //Validate password match
+    if($("#password").val() !== $("#verify").val()) {
+      err.push("verify");
+    }
+    
     return err;
   }
   
@@ -106,6 +171,7 @@ $(document).ready(function(){
       $("#" + errors[i]).next().addClass("active");
     }
     
+    $("#error-div").addClass("active");
     $("#error-div").text("Errors found!");
   }
   
