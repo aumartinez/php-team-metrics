@@ -68,6 +68,7 @@ define ("EXCLUDED_PAGES",
           "register",
           "recover",
           "success",
+          "emailrecover",
           "pending",
           "db-error"
         ));
