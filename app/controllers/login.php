@@ -53,6 +53,7 @@ class Login extends Controller {
         foreach ($_SESSION["error"] as $error) {
           $err_mess .= $error . "<br />\n";
         }
+        unset($_SESSION["error"]);
       };
       
       $this->output->add_locale($err_key, $err_mess);
