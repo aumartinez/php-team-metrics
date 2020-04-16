@@ -168,12 +168,15 @@ a.btn-primary:hover {
 
 /* Forms */
 
+#recover-form,
 #startup-form,
 #register-form,
 #login-form {
   padding: 60px 0;
 }
 
+#recover-form legend,
+#startup-form legend,
 #register-form legend,
 #login-form legend {
   font-size: 36px;
