@@ -9,9 +9,9 @@ class EmailModel extends DbModel {
       $server_url = isset($_SERVER["HTTPS"]) ? "https://" : "http://";
       $server_url .= $_SERVER["SERVER_NAME"];
       
-      $str = $_SERVER["PHP_SELF"];
+      $str = $_SERVER["PHP_SELF"];      
       $arr = explode("/", $str);
-      $str = array("");
+      $str = array();
       
       for ($i = 0; $i < count($arr); $i++) {
         if ($i == (count($arr) - 1)) {
@@ -20,11 +20,10 @@ class EmailModel extends DbModel {
         array_push($str, $arr[i]);
       }
       
-      $str = join("/", $str);
-      $str = substr($str, 1);
+      $str = join("/", $str);      
       
       $server_url .= $str;
-      $server_url .= "/reset/user/" . $url_hash;
+      $server_url .= PATH . "/reset/user/" . $url_hash;
       
       $emailbody = '
             <div style="font-family: Arial, sans-serif; margin: 60px auto; width: 600px">
