@@ -43,6 +43,17 @@ class AuthModel extends DbModel {
     $this->error_check("register");
   }
   
+  public function recovery_required() {
+    $required = "email";
+    
+    # Check required fields
+    if (!isset($_POST["email"]) || $_POST["email"] == "") {
+        $_SESSION["error"][] = $value . " is required";
+    }
+    
+    $this->error_check("recover");
+  }
+  
   # Global sanitize methods
   public function sanitize_post() {
     $this->sanitized = array();      
@@ -52,8 +63,9 @@ class AuthModel extends DbModel {
       $value = stripslashes($value);
       $value = htmlspecialchars($value);
       
-      $this->sanitized[$key] = $this->open_link()->real_escape_string($value);
+      $this->sanitized[$key] = $this->open_link()->real_escape_string($value);      
     }
+    $this->close_link();
     
     return $this->sanitized;
   }
@@ -68,6 +80,7 @@ class AuthModel extends DbModel {
       
       $this->sanitized[$key] = $this->open_link()->real_escape_string($value);
     }
+    $this->close_link();
     
     return $this->sanitized;
   }
@@ -79,7 +92,7 @@ class AuthModel extends DbModel {
     $user = $this->sanitized["user"];
     $password = $this->sanitized["password"];
     
-    $sql = "SELECT * 
+    $sql = "SELECT *
             FROM users
             WHERE user_name = '{$user}' OR email = '{$user}'";
     
@@ -142,15 +155,37 @@ class AuthModel extends DbModel {
       if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
         $_SESSION["error"][] = "Email is invalid";
       }
-    }   
+    }
     
-    # Check if user name is not taken
     $this->sanitize_post();
+    
+    # Check if email address is not duplicated
+    $email = $this->sanitized["email"];
+    
+    $sql = "SELECT u.email
+            FROM users AS u
+            WHERE u.email = '{$email}'
+            UNION
+            SELECT p.email
+            FROM pending AS p
+            WHERE p.email = '{$email}'";
+    
+    $result = $this->get_query($sql);
+    
+    if ($email == $result[0]["email"]) {
+      $_SESSION["error"][] = "Email address already in use";
+    }
+    
+    # Check if user name is not taken    
     $user = $this->sanitized["user"];
     
-    $sql = "SELECT * 
-            FROM users
-            WHERE user_name = '{$user}'";    
+    $sql = "SELECT u.user_name
+            FROM users AS u
+            WHERE u.user_name = '{$user}'
+            UNION
+            SELECT p.user_name
+            FROM pending AS p
+            WHERE p.user_name = '{$user}'";
     
     $result = $this->get_query($sql);
     
@@ -163,6 +198,23 @@ class AuthModel extends DbModel {
       if (strlen($_POST["employee-id"]) != 4) {
         $_SESSION["error"][] = "Invalid Employee ID";
       }
+    }
+    
+    # Check if Employee ID is not taken    
+    $employee_id = $this->sanitized["employee-id"];
+    
+    $sql = "SELECT u.employee_id
+            FROM users AS u
+            WHERE u.employee_id = '{$employee_id}'
+            UNION
+            SELECT p.employee_id
+            FROM pending AS p
+            WHERE p.employee_id = '{$employee_id}'";
+    
+    $result = $this->get_query($sql);
+    
+    if ($employee_id == $result[0]["employee_id"]) {
+      $_SESSION["error"][] = "Employee ID already in use";
     }
     
     # Password is valid and is verified
@@ -183,7 +235,62 @@ class AuthModel extends DbModel {
       }
     }
     
+    # Account name is valid
+    if (isset($_POST["account"]) && $_POST["account"] != "") {
+      $account_name = $this->sanitized["account"];
+      
+      $sql = "SELECT *
+              FROM accounts
+              WHERE account_name = '$account_name'";
+              
+      $result = $this->get_rows($sql);
+      if ($result != 1) {
+        $_SESSION["error"][] = "Invalid account name";        
+      }
+      
+    }
+    
+    # Position name is valid
+    if (isset($_POST["position"]) && $_POST["position"] != "") {
+      $position_name = $this->sanitized["position"];
+      
+      $sql = "SELECT *
+              FROM positions
+              WHERE position_name = '$position_name'";
+      
+      $result = $this->get_rows($sql);
+      if ($result != 1) {
+        $_SESSION["error"][] = "Invalid position name";
+      }
+      
+    } 
+    
     $this->error_check("register");
+  }
+  
+  public function recovery_validate() {
+    # Email is valid
+    if (isset($_POST["email"]) && $_POST["email"] != "") {
+      if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+        $_SESSION["error"][] = "Email is invalid";
+      }
+    }
+    
+    $this->sanitize_post();
+    
+    $email = $this->sanitized["email"];
+    
+    $sql = "SELECT *
+            FROM users
+            WHERE email = '{$email}'";
+    
+    $result = $this->get_rows($sql);
+    
+    if ($result != 1) {
+      $_SESSION["error"][] = "Email not found on registry";
+    }
+
+    $this->error_check("recover");
   }
   
   # Error check method
@@ -214,8 +321,75 @@ class AuthModel extends DbModel {
     $email = $this->sanitized["email"];
     $account_name = "sysadmin";
     $user_access = 1;
+    $approved_by = "system";
   
     $sql = "INSERT INTO users (
+            create_date,
+            user_name,
+            user_firstname,
+            user_lastname,
+            employee_id,
+            team_id,
+            position_name,
+            password,
+            salt,
+            user_pic,
+            email,
+            account_name,
+            user_access,
+            approved_by
+            )
+            VALUES(
+            NOW(),
+            '{$user_name}',
+            '{$user_firstname}',
+            '{$user_lastname}',
+            '{$employee_id}',
+            '{$team_id}',
+            '{$position_name}',
+            '{$password}',
+            '{$salt}',
+            '{$user_pic}',
+            '{$email}',
+            '{$account_name}',
+            '{$user_access}',
+            '{$approved_by}'
+            )";
+            
+    $this->set_query($sql);
+    
+    $this->error_check("login");
+    return true;
+  }
+  
+  # Register all data
+  public function register_data() {
+    
+    $user_name = $this->sanitized["user"];
+    $user_firstname = $this->sanitized["first-name"];
+    $user_lastname = $this->sanitized["last-name"];
+    $employee_id = $this->sanitized["employee-id"];
+    $team_id = "team-000";
+    $position_name = $this->sanitized["position"];
+    
+    $password = $this->sanitized["password"];
+    $salt = "\$6\$rounds=5000\$".randomStr(8)."\$";
+    
+    $password = crypt($password, $salt);
+    $password = substr($password, strlen($salt));
+    
+    $user_pic = DEFAULT_PIC;
+    $email = $this->sanitized["email"];
+    $account_name = $this->sanitized["account"];
+    
+    $sql = "SELECT *
+            FROM positions
+            WHERE position_name = '{$position_name}'";
+            
+    $result = $this->get_query($sql);    
+    $user_access = $result[0]["user_access"];
+    
+    $sql = "INSERT INTO pending (
             create_date,
             user_name,
             user_firstname,
@@ -245,14 +419,46 @@ class AuthModel extends DbModel {
             '{$account_name}',
             '{$user_access}'
             )";
-            
+    
     $this->set_query($sql);
     
+    $this->error_check("register");
     return true;
   }
   
-  public function auth_register() {
-  
+  public function recovery_data() {
+    
+    $email = $this->sanitized["email"];
+    
+    $sql = "SELECT user, email
+            FROM users
+            WHERE email = '{$email}'";
+            
+    $result = $this->get_query($sql);
+    
+    $user = $result[0]["user"];
+    
+    $hash = uniqid("", TRUE);
+    $hash = md5($hash);
+    $hash = $this->open_link()->real_escape_string($hash);
+    
+    $sql = "INSERT INTO resetpassword (
+            user_name,
+            pass_key,
+            create_date,
+            status
+            )
+            VALUES (
+            '{$user}',
+            '{$hash}',
+            NOW(),
+            'A'
+            )";
+            
+    $this->set_query($sql);
+    
+    $this->error_check("recover");
+    return $hash;
   }
   
   # Redirect
