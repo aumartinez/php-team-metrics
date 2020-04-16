@@ -2,7 +2,7 @@
       <div class="container bg-white form-wrapper">
         <div class="row">
           <div class="col-sm-4 col-center">  
-            <form id="register-form" action="{$SITE_ROOT$}/auth/register" method="post">
+            <form id="register-form" action="{$SITE_ROOT$}/auth/register" method="post" class="user-form">
               <p class="text-center">
                 <img class="img-responsive img-center login-logo" src="{$MEDIA$}/img/logo.png" alt="Company logo" />
               </p>
@@ -117,6 +117,7 @@
                   </label>
                   <select class="form-control" id="position" name="position">
                     <option value="" selected>-- select --</option>
+                    <option value="Fake">Fake position</option>
                     <!-- added through api -->
                   </select>
                   <p class="error-mess">
