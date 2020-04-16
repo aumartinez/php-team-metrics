@@ -46,6 +46,12 @@ define ("LOGIN_REQUIRED",
           "password"
         ));
         
+define ("RESET_REQUIRED", 
+        array(
+        "email",
+        "password"
+        ));
+        
 define ("REGISTER_REQUIRED", 
         array(
         "first-name",
@@ -68,8 +74,9 @@ define ("EXCLUDED_PAGES",
           "register",
           "recover",
           "success",
-          "emailrecover",
+          "emailrecover",          
           "pending",
-          "db-error"
+          "db-error",
+          "reset"
         ));
 ?>
