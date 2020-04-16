@@ -42,8 +42,8 @@ define ("SYS_REQUIRED",
  
 define ("LOGIN_REQUIRED", 
         array(
-          "user",
-          "password"
+        "user",
+        "password"
         ));
         
 define ("RESET_REQUIRED", 
