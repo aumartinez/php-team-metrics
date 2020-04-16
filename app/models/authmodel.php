@@ -430,13 +430,13 @@ class AuthModel extends DbModel {
     
     $email = $this->sanitized["email"];
     
-    $sql = "SELECT user, email
+    $sql = "SELECT user_name, email
             FROM users
             WHERE email = '{$email}'";
             
     $result = $this->get_query($sql);
     
-    $user = $result[0]["user"];
+    $user = $result[0]["user_name"];
     
     $hash = uniqid("", TRUE);
     $hash = md5($hash);
@@ -452,7 +452,7 @@ class AuthModel extends DbModel {
             '{$user}',
             '{$hash}',
             NOW(),
-            'A'
+            '0'
             )";
             
     $this->set_query($sql);
