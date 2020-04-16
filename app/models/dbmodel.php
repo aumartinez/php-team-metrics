@@ -9,6 +9,7 @@ class DbModel {
   public function test_db() {
     $this->conx = new mysqli(DBHOST, DBUSER, DBPASS);
     if ($this->conx->connect_errno) {
+      error_log("Database test failed");
       echo "Failed to connect to MySQL: " . $this->conx->connect_error;      
       exit();
     }
@@ -20,6 +21,7 @@ class DbModel {
   protected function open_link() {  
     $this->conx = new mysqli(DBHOST, DBUSER, DBPASS, DBNAME);
     if ($this->conx->connect_errno) {
+      error_log("Connection failed");
       $_SESSION["error"][] = "Failed to connect to MySQL: " . $this->conx->connect_error;
       exit();
     }
@@ -36,6 +38,7 @@ class DbModel {
   protected function set_query($sql) {
     $this->open_link();
     if (!$this->conx->query($sql)) {
+      error_log("Query failed " . $sql);
       $_SESSION["error"][] = "DB error: " . $this->conx->error;
     }
     $this->conx->query($sql);    
@@ -45,6 +48,7 @@ class DbModel {
   protected function set_multyquery($sql) {
     $this->open_link();
     if (!$this->conx->multi_query($sql)) {
+      error_log("Query failed: " . $sql);
       $_SESSION["error"][] = "DB error: " . $this->conx->error;      
     }
     $this->conx->multi_query($sql);
@@ -57,6 +61,7 @@ class DbModel {
     $result = $this->conx->query($sql);     
     
     if (!$result) {
+      error_log("Query failed: " . $sql);
       $_SESSION["error"][] = "Query error: " . $this->conx->error;
       return false;
     }
@@ -64,6 +69,7 @@ class DbModel {
     while ($this->rows[] = $result->fetch_assoc());    
     $result->free();
     $this->close_link();
+    
     array_pop($this->rows);    
     return $this->rows;
   }
@@ -74,6 +80,7 @@ class DbModel {
     $result = $this->conx->query($sql);
     
     if (!$result) {
+      error_log("Query failed: " . $sql);
       $_SESSION["error"][] = "Query error: " . $this->conx->error;
       return false;
     }
