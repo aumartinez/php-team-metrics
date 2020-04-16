@@ -36,7 +36,7 @@ class Success extends Controller {
   
   public function recover() {
     $this->get_model("PageModel")->page_title = "Password recovery";
-    $this->build_page("emailrecover");
+    $this->build_page("success-recover");
   }
   
   # Not found handler
