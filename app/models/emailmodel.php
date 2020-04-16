@@ -23,7 +23,7 @@ class EmailModel extends DbModel {
       $str = join("/", $str);      
       
       $server_url .= $str;
-      $server_url .= PATH . "/reset/user/" . $url_hash;
+      $server_url .= PATH . "/reset/user/?h=" . $url_hash;
       
       $emailbody = '
             <div style="font-family: Arial, sans-serif; margin: 60px auto; width: 600px">
