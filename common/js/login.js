@@ -37,18 +37,18 @@ $(document).ready(function(){
   });
   
   function validateForm() {    
-    var arr = [];
+    var err = [];
         
     //Required fields    
     if ($("#user").val().length == 0) {
-      arr.push("user");
+      err.push("user");
     }
     
     if ($("#password").val().length == 0) {
-      arr.push("password");
+      err.push("password");
     }
     
-    return arr;
+    return err;
   }
   
   function displayErrors(errors) {
