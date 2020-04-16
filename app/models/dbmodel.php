@@ -37,21 +37,25 @@ class DbModel {
   # Submit SQL query for INSERT, UPDATE or DELETE
   protected function set_query($sql) {
     $this->open_link();
-    if (!$this->conx->query($sql)) {
+    $result = $this->conx->query($sql);
+    
+    if (!$result) {
       error_log("Query failed " . $sql);
       $_SESSION["error"][] = "DB error: " . $this->conx->error;
     }
-    $this->conx->query($sql);    
+    
     $this->close_link();
   }
   
   protected function set_multyquery($sql) {
     $this->open_link();
-    if (!$this->conx->multi_query($sql)) {
+    $result = $this->conx->multi_query($sql);
+    
+    if (!$result) {
       error_log("Query failed: " . $sql);
       $_SESSION["error"][] = "DB error: " . $this->conx->error;      
     }
-    $this->conx->multi_query($sql);
+    
     $this->close_link();
   }
   
