@@ -44,14 +44,27 @@ class AuthModel extends DbModel {
   }
   
   public function recovery_required() {
-    $required = "email";
-    
+        
     # Check required fields
     if (!isset($_POST["email"]) || $_POST["email"] == "") {
-        $_SESSION["error"][] = $value . " is required";
+        $_SESSION["error"][] = "Email is required";
     }
     
     $this->error_check("recover");
+  }
+  
+  public function reset_required() {
+    $required = RESET_REQUIRED;
+    
+    # Check required fields
+    foreach ($required as $value) {
+      if (!isset($_POST[$value]) || $_POST[$value] == "") {
+        $_SESSION["error"][] = $value . " is required";
+      }
+    }
+    
+    $hash = $_POST["hash"];    
+    $this->error_check("reset/user/?h=" . $hash);
   }
   
   # Global sanitize methods
@@ -79,8 +92,7 @@ class AuthModel extends DbModel {
       $value = htmlspecialchars($value);
       
       $this->sanitized[$key] = $this->open_link()->real_escape_string($value);
-    }
-    $this->close_link();
+    }    
     
     return $this->sanitized;
   }
@@ -291,6 +303,10 @@ class AuthModel extends DbModel {
     }
 
     $this->error_check("recover");
+  }
+  
+  public function reset_validate() {
+    return true;
   }
   
   # Error check method
