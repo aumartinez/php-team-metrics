@@ -49,7 +49,8 @@ define ("LOGIN_REQUIRED",
 define ("RESET_REQUIRED", 
         array(
         "email",
-        "password"
+        "password",
+        "verify"
         ));
         
 define ("REGISTER_REQUIRED", 
