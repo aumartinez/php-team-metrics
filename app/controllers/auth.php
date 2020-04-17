@@ -48,7 +48,7 @@ class Auth extends Controller {
   } 
   
   public function login() {    
-    # Check if referred URI is coming from login form
+    # Check if request is coming from form
     if (!isset($_POST["submit-form"])) {
       $this->not_found();
     }
@@ -68,6 +68,7 @@ class Auth extends Controller {
   }
   
   public function register() {
+    # Check if request is coming from form
     if (!isset($_POST["submit-form"])) {
       $this->not_found();
     }
@@ -86,7 +87,8 @@ class Auth extends Controller {
     }    
   }
   
-  public function email() {
+  public function recover() {
+    # Check if request is coming from form
     if (!isset($_POST["submit-form"])) {
       $this->not_found();
     }
@@ -108,7 +110,29 @@ class Auth extends Controller {
     }
     
   }
-   
+  
+  public function reset() {
+    # Check if request is coming from form
+    if (!isset($_POST["submit-form"])) {
+      $this->not_found();
+    }
+    
+    $_SESSION["submit-form"] = true;
+    $_SESSION["error"] = array();    
+    
+    $this->get_model("AuthModel")->reset_required();
+    $this->get_model("AuthModel")->sanitize_post();
+    $this->get_model("AuthModel")->reset_validate();
+    
+    if ($this->get_model("AuthModel")->reset_data()) {
+      $this->get_model("AuthModel")->redirect(PATH . "/success/password");
+    }
+    else {
+      $this->get_model("AuthModel")->redirect(PATH . "/reset");
+    }
+    
+  }
+     
   public function not_found() {
     $this->get_model("AuthModel")->redirect(PATH . "/login");
   }
