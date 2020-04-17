@@ -441,6 +441,21 @@ class AuthModel extends DbModel {
     $hash = uniqid("", TRUE);
     $hash = md5($hash);
     $hash = $this->open_link()->real_escape_string($hash);
+    $this->close_link();
+    
+    $sql = "SELECT user_name
+            FROM resetpassword
+            WHERE user_name = '{$user}' AND status = '0'";
+    
+    $found = $this->get_rows($sql);
+    
+    if ($found > 0) {
+      $sql = "UPDATE resetpassword
+              SET status = '1'
+              WHERE user_name = '{$user}' AND status = '0'";
+              
+      $this->set_query($sql);
+    }
     
     $sql = "INSERT INTO resetpassword (
             user_name,
@@ -455,9 +470,9 @@ class AuthModel extends DbModel {
             '0'
             )";
             
-    $this->set_query($sql);
-    
+    $this->set_query($sql);    
     $this->error_check("recover");
+    
     return $hash;
   }
   
