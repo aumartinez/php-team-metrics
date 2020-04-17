@@ -93,6 +93,7 @@ class AuthModel extends DbModel {
       
       $this->sanitized[$key] = $this->open_link()->real_escape_string($value);
     }    
+    $this->close_link();
     
     return $this->sanitized;
   }
