@@ -307,6 +307,42 @@ class AuthModel extends DbModel {
   }
   
   public function reset_validate() {
+    $hash = $this->sanitized["hash"];
+    
+    $sql = "SELECT *
+            FROM resetpassword
+            WHERE pass_key = '{$hash}'";
+            
+    $result = $this->get_query($sql);
+    
+    # Date should be less than 24 hours    
+    $today = time();
+    $today = date("Y-m-d H:i:s", $today);
+    $today = strtotime($today);
+    $create_date = $result[0]["create_date"];    
+    $create_date = strtotime($create_date);
+    
+    $diff = ($today - $create_date) / 3600;    
+    
+    # If link has been active for more than 24 hours, link is expired
+    if (floor($diff) > 24) {
+      $sql = "UPDATE resetpassword
+              SET status = '1'
+              WHERE pass_key = '{$hash}'";
+              
+      $this->set_query($sql);
+    
+      $_SESSION["error"][] = "Password link expired and is not valid";
+      $this->error_check("reset/user/?h=" . $hash);
+    }
+    
+    $status = $result[0]["status"];
+    
+    if ($status != 0) {
+      $_SESSION["error"][] = "Password link is no longer valid";
+      $this->error_check("reset/user/?h=" . $hash);
+    }
+    
     return true;
   }
   
@@ -491,6 +527,32 @@ class AuthModel extends DbModel {
     $this->error_check("recover");
     
     return $hash;
+  }
+  
+  public function reset_data() {
+    $hash = $this->sanitized["hash"];
+    $email = $this->sanitized["email"];
+    $password = $this->sanitized["password"];
+    $salt = "\$6\$rounds=5000\$".randomStr(8)."\$";
+    
+    $password = crypt($password, $salt);
+    $password = substr($password, strlen($salt));
+    
+    $sql = "UPDATE users
+            SET password = '{$password}',
+                salt = '{$salt}'
+            WHERE email = '{$email}'";
+            
+    $this->set_query($sql);
+    
+    $sql = "UPDATE resetpassword
+            SET status = '1'
+            WHERE pass_key = '{$hash}'";
+            
+    $this->set_query($sql);
+    
+    $this->error_check("reset/user/?h=" . $hash);
+    return true;
   }
   
   # Redirect
