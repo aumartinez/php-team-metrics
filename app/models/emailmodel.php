@@ -51,16 +51,19 @@ class EmailModel extends DbModel {
                  
       $headers = implode("\r\n", $headers);
       $send = mail($to, $subject, $txt, $headers);
-      
+                  
       if (!$send) {
-        $_SESSION["error"][] = "Mail send error, try again later";
+        $_SESSION["error"][] = "Mail send error, try again later";        
         $this->redirect(PATH . "/recover");
+      }
+      else {
+        return true;
       }
     }
       
     # Redirect
-    public function redirect($page) {
-      header ("Location: /" . $page);
+    public function redirect($page) {      
+      header ("Location: /" . $page);      
       exit();
     }
 }
