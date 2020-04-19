@@ -70,7 +70,10 @@ class Login extends Controller {
     # If DB doesn't exist create it
     if(!$this->get_model("DbModel")->test_db()) {
       $this->get_model("StartupModel")->first_run();
-      
+    }    
+    
+    # If DB tables aren't setup, create them
+    if (!$this->get_model("StartupModel")->test_tables()) {
       if (file_exists(ROOT . DS . "config" . DS . "createtables.sql")) {        
         $sql = file_get_contents(ROOT . DS . "config" . DS . "createtables.sql");
         $this->get_model("StartupModel")->setup_tables($sql);
