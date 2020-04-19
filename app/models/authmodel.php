@@ -254,7 +254,7 @@ class AuthModel extends DbModel {
       
       $sql = "SELECT *
               FROM accounts
-              WHERE account_name = '$account_name'";
+              WHERE account_name = '{$account_name}'";
               
       $result = $this->get_rows($sql);
       if ($result != 1) {
@@ -269,7 +269,7 @@ class AuthModel extends DbModel {
       
       $sql = "SELECT *
               FROM positions
-              WHERE position_name = '$position_name'";
+              WHERE position_name = '{$position_name}'";
       
       $result = $this->get_rows($sql);
       if ($result != 1) {
