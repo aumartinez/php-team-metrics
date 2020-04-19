@@ -31,8 +31,7 @@ class StartupModel extends DbModel {
   public function test_users() {
     $sql = "SELECT *
             FROM users";
-            
-    $result = array();
+    
     $result = $this->get_rows($sql);
     
     if ($result > 0){
