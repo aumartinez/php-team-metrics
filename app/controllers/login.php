@@ -12,7 +12,7 @@ class Login extends Controller {
     # Any models required to interact with this controller should be loaded here    
     $this->load_model("DbModel");
     $this->load_model("PageModel");
-    $this->load_model("StartupModel");
+    $this->load_model("StartupModel");    
     
     # Instantiate custom view output
     $this->output = new PageView();
@@ -70,6 +70,7 @@ class Login extends Controller {
     # If DB doesn't exist create it
     if(!$this->get_model("DbModel")->test_db()) {
       $this->get_model("StartupModel")->first_run();
+      $this->redirect("login");
     }    
     
     # If DB tables aren't setup, create them
@@ -78,6 +79,7 @@ class Login extends Controller {
         $sql = file_get_contents(ROOT . DS . "config" . DS . "createtables.sql");
         $this->get_model("StartupModel")->setup_tables($sql);
         $this->get_model("StartupModel")->startup_data();
+        $this->redirect("login");
       }
       else {
         $this->build_page("db-error");
@@ -144,6 +146,12 @@ class Login extends Controller {
     $html = $this->output->replace_localizations($html_src);
     
     $this->get_view()->render($html);
+  }
+  
+  # Redirect
+  protected function redirect($page) {
+    header ("Location: /" . PATH . $page);
+    exit();
   }
   
 }
