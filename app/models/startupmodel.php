@@ -9,6 +9,20 @@ class StartupModel extends DbModel {
     $this->create_db($dbname);
   }
   
+  public function test_tables() {        
+    $dbname = DBNAME;
+    $sql = "SHOW TABLES IN {$dbname}";
+    
+    $result = $this->get_query($sql);
+    
+    if ($result){
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+  
   # Prepare DB tables
   public function setup_tables($sql) {
     $this->set_multyquery($sql);
@@ -19,9 +33,9 @@ class StartupModel extends DbModel {
             FROM users";
             
     $result = array();
-    $result = $this->get_query($sql);
+    $result = $this->get_rows($sql);
     
-    if (count($result) > 0){
+    if ($result > 0){
       return true;
     }
     else {
@@ -82,7 +96,7 @@ class StartupModel extends DbModel {
     
     $this->dblink = new mysqli(DBHOST, DBUSER, DBPASS);
     if (!$this->dblink->query($sql) == true) {
-      echo $this->dblink->error;
+      $_SESSION["error"][] = $this->dblink->error;
     }
     
     $this->dblink->close();    
