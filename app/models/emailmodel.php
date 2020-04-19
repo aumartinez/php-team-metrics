@@ -27,12 +27,12 @@ class EmailModel extends DbModel {
       
       $emailbody = '
             <div style="font-family: Arial, sans-serif; margin: 60px auto; width: 600px">
-              <h3 style="text-align: center">
+              <h3 style="text-align: center; color: #46b3e6;">
                 Password reset request
               </h3>
               <hr />
               <p>
-                Click <a href="'.$server_url.'" title="Reset password">here</a> to open link to reset password page.
+                Click <a href="'.$server_url.'" title="Reset password">here</a> to open the link to the reset password page.
               </p>
             </div>          
       ';
