@@ -10,7 +10,8 @@ define ("DBHOST", "localhost");
 define ("WEB_TITLE", "Web app");
 
 # App main folder name
-define ("PATH", "php-team-metrics");
+define ("PATH", "php-team-metrics"); # Add container folder if required
+define ("MAIN", "php-team-metrics"); # Used for router setup, app main folder
 
 # PATH to media files and site root constants
 define ("SITE_ROOT", "/" . PATH);
