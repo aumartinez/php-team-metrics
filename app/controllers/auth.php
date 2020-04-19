@@ -125,9 +125,10 @@ class Auth extends Controller {
     $this->get_model("AuthModel")->reset_validate();
     
     $hash = $this->get_model("AuthModel")->sanitized["hash"];
+    $email = $this->get_model("AuthModel")->sanitized["email"];
     
     if ($this->get_model("AuthModel")->reset_data()) {
-      $this->get_model("EmailModel")->submit_reset($hash);
+      $this->get_model("EmailModel")->submit_reset($hash, $email);
       $this->get_model("AuthModel")->redirect(PATH . "/success/password");
     }
     else {
