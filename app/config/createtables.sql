@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS pending (
 
 CREATE TABLE IF NOT EXISTS resetpassword (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,  
-  user_name INT NOT NULL,
+  user_name VARCHAR(50) NOT NULL,
   pass_key VARCHAR(255) NOT NULL,
   create_date DATETIME NOT NULL,
   status INT NOT NULL
@@ -94,8 +94,9 @@ CREATE TABLE IF NOT EXISTS resetpassword (
 
 CREATE TABLE IF NOT EXISTS userlog (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,  
-  user_name INT NOT NULL,
+  user_name VARCHAR(50) NOT NULL,
   locked INT NOT NULL,
+  tries INT NOT NULL,
   log_date DATETIME NOT NULL,
   logout_date DATETIME NOT NULL,
   user_ip VARCHAR(100) NOT NULL
