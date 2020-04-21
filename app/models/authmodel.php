@@ -166,10 +166,10 @@ class AuthModel extends DbModel {
                 '{$ip}'
                 )";
         
-        $this->set_query($sql);
-        
+        $this->set_query($sql);        
         $this->error_check("login");
         
+        unset($_SESSION["tries"]);
         $_SESSION["logged"] = true;
         return true;
       }
