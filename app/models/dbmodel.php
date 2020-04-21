@@ -41,7 +41,7 @@ class DbModel {
     
     if (!$result) {
       error_log("Query failed " . $sql);
-      $_SESSION["error"][] = "DB error: " . $this->conx->error;
+      $_SESSION["error"][] = "Query error: " . $this->conx->error;
     }
     
     $this->close_link();
@@ -53,7 +53,7 @@ class DbModel {
     
     if (!$result) {
       error_log("Query failed: " . $sql);
-      $_SESSION["error"][] = "DB error: " . $this->conx->error;      
+      $_SESSION["error"][] = "Query error: " . $this->conx->error;      
     }
     
     $this->close_link();
@@ -61,6 +61,7 @@ class DbModel {
   
   # Submit SELECT SQL query
   protected function get_query($sql) {
+    $this->rows = array();
     $this->open_link();
     $result = $this->conx->query($sql);     
     
@@ -74,7 +75,7 @@ class DbModel {
     $result->free();
     $this->close_link();
     
-    array_pop($this->rows);    
+    array_pop($this->rows);
     return $this->rows;
   }
   
