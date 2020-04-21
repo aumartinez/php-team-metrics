@@ -58,7 +58,7 @@ class Auth extends Controller {
     
     # Initialize methods
     $this->get_model("AuthModel")->login_required();
-    $this->get_model("AuthModel")->sanitize_post();
+    $this->get_model("AuthModel")->sanitize_post();    
     if ($this->get_model("AuthModel")->auth_user()) {
       $this->get_model("AuthModel")->redirect(PATH . "/cpanel");
     }
