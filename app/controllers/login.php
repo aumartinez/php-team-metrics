@@ -150,7 +150,7 @@ class Login extends Controller {
   
   # Redirect
   protected function redirect($page) {
-    header ("Location: /" . PATH . $page);
+    header ("Location: /" . PATH . "/" . $page);
     exit();
   }
   
