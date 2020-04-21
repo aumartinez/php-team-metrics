@@ -107,25 +107,105 @@ class AuthModel extends DbModel {
     
     $sql = "SELECT *
             FROM users
-            WHERE user_name = '{$user}' OR email = '{$user}'";
+            WHERE user_name = '{$user}' OR 
+                  email = '{$user}'";
     
     $result = $this->get_query($sql);
     
     $salt = $result[0]["salt"];    
     $crypted = crypt($password, $salt);
-    $crypted = substr($crypted, strlen($salt));    
-            
+    $crypted = substr($crypted, strlen($salt));
+    
+    if (!empty($_SERVER["HTTP_CLIENT_IP"])) {
+      $ip = $_SERVER["HTTP_CLIENT_IP"];
+    }
+    else if (!empty($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+      $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+    }
+    else {
+      $ip = $_SERVER["REMOTE_ADDR"];
+    }
+    
+    # Check for password tries
+    if (!isset($_SESSION["tries"])) {
+      $_SESSION["tries"] = 1;
+    }
+    
     if ($user && $password) {      
-      if ($crypted == $result[0]["password"]) {        
-        $_SESSION["logged"] = true;
+      if ($crypted == $result[0]["password"]) {
         
+        $email = $result[0]["email"];
+        
+        $sql = "SELECT *
+                FROM userlog
+                WHERE user_name = '{$user}' OR
+                      user_name = '{$email}'
+                ORDER BY id DESC
+                LIMIT 1";
+                      
+        $found = $this->get_query($sql);
+                
+        if ($found[0]["locked"] == 1) {          
+          $_SESSION["error"][] = "User has been locked, contact the system admin";
+          $this->error_check("login");
+        }               
+                      
+        $sql = "INSERT INTO userlog
+                (
+                user_name,
+                locked,                
+                log_date,
+                logout_date,
+                user_ip
+                )
+                VALUES (
+                '{$user}',
+                '0',                
+                NOW(),
+                NOW(),
+                '{$ip}'
+                )";
+        
+        $this->set_query($sql);
+        
+        $this->error_check("login");
+        
+        $_SESSION["logged"] = true;
         return true;
       }
       else {
+        $count = $_SESSION["tries"];
+        $count++;
+        
+        $_SESSION["tries"] = $count;
+        
+        if ($_SESSION["tries"] > 3) {
+          $sql = "INSERT INTO userlog
+                  (
+                  user_name,
+                  locked,
+                  log_date,
+                  logout_date,
+                  user_ip
+                  )
+                  VALUES (
+                  '{$user}',
+                  '1',
+                  NOW(),                
+                  NOW(),
+                  '{$ip}'
+                  )";
+          
+          $this->set_query($sql);
+        
+          $_SESSION["error"][] = "User has been locked, contact the system admin";
+          $this->error_check("login");
+        }
+        
         $_SESSION["error"][] = "User/Password don't match";        
       }
     }
-    else {
+    else {    
       $_SESSION["error"][] = "Couldn't authenticate user";
     }
     
@@ -414,7 +494,7 @@ class AuthModel extends DbModel {
     $this->error_check("login");
     return true;
   }
-  
+ 
   # Register all data
   public function register_data() {
     
