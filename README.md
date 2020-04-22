@@ -17,7 +17,7 @@ DB credentials and app folder location should be added to the config.php file, t
 
 ### Login page
 
-Login page will authenticate users using either a username or email address, will also keep a log of users authenticated and will block failed to attempts to login to the application.
+Login page will authenticate users using either a username or email address, will also keep a log of users authenticated and will block failed attempts to login to the application.
 
 ### Registration page
 
