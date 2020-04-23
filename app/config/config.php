@@ -27,11 +27,9 @@ define ("NOT_FOUND", "not_found");
 define ("LOCALES", 
         array(
           "SITE_ROOT" => SITE_ROOT,
-          "MEDIA" => MEDIA
+          "MEDIA" => MEDIA,
+          "PROFILE_PIC" => MEDIA . "/img/default-pic.png"
         ));
-
-# User default
-define ("DEFAULT_PIC", MEDIA . "/img/". "default-pic.png");
 
 # Required values
 define ("SYS_REQUIRED", 
