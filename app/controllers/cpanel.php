@@ -25,7 +25,16 @@ class CPanel extends Controller {
       exit();
     }
     else {
-      $this->build_page("cpanel");
+      if ($_SESSION["access"] == 1) {
+        $this->build_page("admin");
+      }
+      if ($_SESSION["access"] == 2 || $_SESSION["access"] == 3) {
+        $this->build_page("lead");
+      }
+      if ($_SESSION["access"] == 4) {
+        $this->build_page("lead");
+      }
+      
     }    
   }
   
