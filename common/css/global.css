@@ -84,9 +84,14 @@ h3 {
   background-color: #fff;
 }
 
+a,
 a.color-primary,
 .color-primary {
   color: #46b3e6;
+}
+
+a:hover {
+  color: #4d80e4;
 }
 
 a.color-secondary,
@@ -242,4 +247,108 @@ form div.form-group:last-child {
 
 .alert {
   border-radius: 0;
+}
+
+/* Header */
+
+header .brand {
+  text-align: center;
+}
+
+header > .container {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+header .user {    
+  height: 100px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+}
+
+header .user-pic {
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  width: 70px;
+  height: 70px;
+  float: left; 
+  overflow: hidden;
+}
+
+header .user-pic img {
+  max-width: 100%;
+  padding: 8px 0;
+}
+
+header .user-name {
+  float: left;
+  margin-left: 15px;
+}
+
+header .user-name.dropdown a:active,
+header .user-name.dropdown a:hover {
+  text-decoration: none;
+}
+
+.dropdown-menu {
+  border-radius: 0;
+}
+
+/* Control panel */
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.tab-content .tab-content{
+  display: block;
+}
+
+.nav-pills > li > a {
+  border-radius: 0;
+}
+
+.nav-pills > li.active > a, 
+.nav-pills > li.active > a:focus {
+  background-color: #46b3e6;
+}
+
+.nav-pills > li.active > a:hover {
+  background-color: #4d80e4;
+}
+
+.tab-content ul > li.active::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 60%;
+  height: 3px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  background-color: #46b3e6;
+}
+
+@media (min-width: 768px) {
+  /* Header */
+  
+  header .brand {
+    text-align: left;
+  }
+  
+  header .user {
+    float: right;
+  }
 }
