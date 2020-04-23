@@ -170,7 +170,11 @@ class AuthModel extends DbModel {
         $this->error_check("login");
         
         unset($_SESSION["tries"]);
+        
+        $_SESSION["user"] = $result[0]["user_firstname"];
+        $_SESSION["access"] = $result[0]["user_access"];
         $_SESSION["logged"] = true;
+        
         return true;
       }
       else {
