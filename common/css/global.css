@@ -38,12 +38,32 @@ div[class*="col-"].col-center {
   text-align: center;
 }
 
+a.block,
+.block {
+  display: block;  
+}
+
 .long-btn {
   width: 100%;
 }
 
 .full-height {
   min-height: 100vh;
+}
+
+.sm-padd {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.md-padd {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.lg-padd {
+  padding-top: 45px;
+  padding-bottom: 45px;
 }
 
 /* Titles */
@@ -342,6 +362,9 @@ header .user-name.dropdown a:hover {
 }
 
 @media (min-width: 768px) {
+  
+  /* Helpers */
+
   /* Header */
   
   header .brand {
