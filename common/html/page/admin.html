@@ -1,45 +1,135 @@
     <section class="body">
       <div class="container bg-white">
-        <div class="row">          
-          <div class="col-sm-3 col-md-2">
+        <div class="row">
+          <!-- right panel -->
+          <div class="col-sm-4 col-md-3 col-lg-2">
             <ul class="nav nav-pills nav-stacked">
               <li class="active">
-                <a data-toggle="pill" href="#panel-1">Home</a>
+                <a data-toggle="pill" href="#panel-1">Manage Accounts</a>
               </li>
               <li>
-                <a data-toggle="pill" href="#panel-2">Menu 1</a>
+                <a data-toggle="pill" href="#panel-2">Staff</a>
               </li>
               <li>
-                <a data-toggle="pill" href="#panel-3">Menu 2</a>
-              </li>
+                <a data-toggle="pill" href="#panel-3">Approvals <span class="circle-alert">{$NOTIFICATIONS$}</span></a>
+              </li>              
             </ul>
           </div>
-            
-          <div class="col-sm-9 col-md-10">
+          <!-- /right panel -->
+          
+          <!-- left panel -->
+          <div class="col-sm-8 col-md-9 col-lg-10">
             <div id="panel-1" class="tab-content active">
               <div class="tab-pane fade in active">
                 <ul class="nav nav-tabs">
-                  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-                  <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-                  <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+                  <li class="active"><a data-toggle="tab" href="#menu-1">Accounts</a></li>
+                  <li><a data-toggle="tab" href="#menu-2">Positions</a></li>
+                  <li><a data-toggle="tab" href="#menu-3">Teams</a></li>
                 </ul>
                 
                 <div class="tab-content">
-                  <div id="home" class="tab-pane fade in active">
-                    <h3>Admin page</h3>
-                    <p>Some content.</p>
-                  </div>
+                  <div id="menu-1" class="tab-pane fade in active">
+                    <h2>Accounts</h2>
+                    <div class="sub-panel">
+                      <a id="add-account-btn" class="well well-sm block collapsed" data-toggle="collapse" href="#add-account">
+                        Add a new account
+                        <span class="pull-right">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <i class="fa fa-minus" aria-hidden="true"></i>
+                        </span>
+                      </a>
+                      
+                      <div id="add-account" class="collapse well well-sm">
+                        <form id="add-account-form" action="{$SITE_ROOT$}/add/account">
+                          <div class="form-group">
+                            <input id="account" name="account" class="form-control" placeholder="Account name" required />
+                            <button type="submit" id="account-submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    
+                    <div class="sub-panel">
+                      <h3>
+                        Accounts List
+                      </h3>
+                      
+                      <div class="list">
+                        <ul id="accounts-list">
+                          <!-- filled with JS -->
+                        </ul>
+                      </div>
+                    </div>
+                  </div><!-- /#menu-1 -->
                   
-                  <div id="menu1" class="tab-pane fade">
-                    <h3>Menu 1</h3>
-                    <p>Some content in menu 1.</p>
-                  </div>
+                  <div id="menu-2" class="tab-pane fade">
+                    <h2>Staff positions</h2>
+                    <div class="sub-panel">
+                      <a id="add-position-btn" class="well well-sm block collapsed" data-toggle="collapse" href="#add-position">
+                        Add a new Staff position
+                        <span class="pull-right">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <i class="fa fa-minus" aria-hidden="true"></i>
+                        </span>
+                      </a>
+                      
+                      <div id="add-position" class="collapse well well-sm">
+                        <form id="add-position-form" action="{$SITE_ROOT$}/add/position">
+                          <div class="form-group">
+                            <input id="position-name" name="position-name" class="form-control" placeholder="Position name" required />
+                            <button type="submit" id="position-submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    
+                    <div class="sub-panel">
+                      <h3>
+                        Staff positions List
+                      </h3>
+                      
+                      <div class="list">
+                        <ul id="positions-list">
+                          <!-- filled with JS -->
+                        </ul>
+                      </div>
+                    </div>
+                  </div><!-- /#menu-2 -->
                   
-                  <div id="menu2" class="tab-pane fade">
-                    <h3>Menu 2</h3>
-                    <p>Some content in menu 2.</p>
+                  <div id="menu-3" class="tab-pane fade">
+                    <h2>Staff positions</h2>
+                    <div class="sub-panel">
+                      <a id="add-position-btn" class="well well-sm block collapsed" data-toggle="collapse" href="#add-position">
+                        Add a new Staff position
+                        <span class="pull-right">
+                          <i class="fa fa-plus" aria-hidden="true"></i>
+                          <i class="fa fa-minus" aria-hidden="true"></i>
+                        </span>
+                      </a>
+                      
+                      <div id="add-position" class="collapse well well-sm">
+                        <form id="add-position-form" action="{$SITE_ROOT$}/add/position">
+                          <div class="form-group">
+                            <input id="position-name" name="position-name" class="form-control" placeholder="Position name" required />
+                            <button type="submit" id="position-submit" class="btn btn-primary">Submit</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    
+                    <div class="sub-panel">
+                      <h3>
+                        Staff positions List
+                      </h3>
+                      
+                      <div class="list">
+                        <ul id="positions-list">
+                          <!-- filled with JS -->
+                        </ul>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </div><!-- /#menu-3 -->
               </div>
             </div><!-- /#panel -->
             
@@ -96,7 +186,7 @@
                 </div><!-- /.tab-content -->
               </div>
             </div><!-- /#panel -->
-          </div>                
+          </div><!-- /left panel -->                
         </div><!-- /.row -->
       </div>
     </section>
